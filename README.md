@@ -49,26 +49,26 @@ Other things to consider as a possibility:
 
 Graphs can be used to model an incredibly large range of ideas, physical systems, concepts, web-components, etc. Here is a very incomplete list of some of the ways you might use django-directed, along with the underlying structure that might be best to represent them.
 
-- Threaded discussion comments
-- Social "follows" (which users are following which)
-- Model of resource flow in gas/electrical/water/sewer distribution systems
-- The underlying structure to business process automation (e.g. tools like Airflow)
-- Hierarchical bill of materials for a product
-- Network mapping (Internet device map, map of linked pages in a website, modeling roadways, modeling airline/train paths, etc)
-- Social graphs showing relationships between people
-- Modeling dependencies in software applications
-- Scheduling tasks for project management
-- Fault-tree analysis in industrial systems
-- Version control systems
-- Which academic papers are cited by later papers
-- Dependencies in educational plans (which pieces of knowledge or classes must preceed others as a student progresses toward a goal?)
-- Modeling supply chains from initial resource (mining, forestry, etc) to manufacturer to retailer to consumer market
-- Family trees and other genealogical models
-- Hierarchical file/folder structures
-- Mind maps
-- TRIE structures
-- Storing information about phone calls, emails, or other interactions between people
-
+| Use-Cases                                                                                                                           | Potential Data Structure     |
+|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| Threaded discussion comments                                                                                                        | Arborescence                 |
+| Social follows" (which users are following which)"                                                                                  | Directed cyclic graph        |
+| Model of resource flow in gas/electrical/water/sewer distribution systems                                                           | Arborescence                 |
+| The underlying structure to business process automation (e.g. tools like Airflow)                                                   | Directed cyclic graph or DAG |
+| Hierarchical bill of materials for a product                                                                                        | Polytree or Arborescence     |
+| Network mapping (Internet device map, map of linked pages in a website, modeling roadways, modeling airline/train paths, etc)       | Directed cyclic graph        |
+| Modeling dependencies in software applications                                                                                      | DAG                          |
+| Scheduling tasks for project management                                                                                             | Directed cyclic graph or DAG |
+| Fault-tree analysis in industrial systems                                                                                           | Polytree                     |
+| Version control systems                                                                                                             | DAG                          |
+| Which academic papers are cited by later papers                                                                                     | DAG                          |
+| Dependencies in educational plans (which pieces of knowledge or classes must preceed others as a student progresses toward a goal?) | Arborescence                 |
+| Modeling supply chains from initial resource (mining, forestry, etc) to manufacturer to retailer to consumer market                 | DAG or Polytree              |
+| Family trees and other genealogical models                                                                                          | DAG                          |
+| Hierarchical file/folder structures                                                                                                 | Arborescence                 |
+| Mind maps                                                                                                                           | DAG                          |
+| TRIE structures                                                                                                                     | Arborescence                 |
+| Storing information about phone calls, emails, or other interactions between people                                                 | Directed cyclic graph or DAG |
 
 Essentially, just about anything involving causal relationships, hierarchies, or dependencies can be modeled with a directed graph. This package may be useful if you need to persist that information for use with django applications.
 
@@ -87,5 +87,3 @@ Essentially, just about anything involving causal relationships, hierarchies, or
 
 ## CHANGELOG
 
-- 20210208
-    - Building initial readme entry to start documenting project goals.
