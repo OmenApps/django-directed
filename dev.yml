@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  
+  postgres:
+    image: postgres:14.1
+    container_name: postgres
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=9932
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=postgres
+    ports:
+      - "9932:5432"

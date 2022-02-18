@@ -1,0 +1,10 @@
+invoke
+twine
+wheel
+zest.releaser
+django>=2.2
+sphinx
+myst-parser
+docutils>=0.17
+psycopg2-binary>=2.9.3,<3
+
