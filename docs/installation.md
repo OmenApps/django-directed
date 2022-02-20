@@ -1,9 +1,11 @@
 # Installation
 
-At the command line with easy_install:
+## Basic
 
-    easy_install django-directed
+For the default functionality, simply install with `pip`
 
-Or with pip:
+```bash
+pip install django-directed
+```
 
-    pip install django-directed
+In future iterations of this project, expect the option to install 'extras' for access to additional features and capabilities.

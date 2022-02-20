@@ -7,6 +7,7 @@
    
 readme
 installation
+terminology
 usage
 contributing
 authors
