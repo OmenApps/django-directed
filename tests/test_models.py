@@ -14,7 +14,6 @@ from django_directed import models
 
 
 class TestDjangoDirected(TestCase):
-
     def setUp(self):
         pass
 

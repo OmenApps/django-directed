@@ -3,12 +3,12 @@ from django.views.generic import (
     DeleteView,
     DetailView,
     UpdateView,
-    ListView
+    ListView,
 )
 
 from .models import (
-	Edge,
-	Node,
+    Edge,
+    Node,
 )
 
 
@@ -60,4 +60,3 @@ class NodeUpdateView(UpdateView):
 class NodeListView(ListView):
 
     model = Node
-

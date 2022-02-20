@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 from .models import (
-   Edge,
-   Node,
+    Edge,
+    Node,
 )
 
 
@@ -14,4 +14,3 @@ class EdgeAdmin(admin.ModelAdmin):
 @admin.register(Node)
 class NodeAdmin(admin.ModelAdmin):
     pass
-
