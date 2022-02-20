@@ -1,15 +1,20 @@
 version: '3'
 
+volumes:
+  local_postgres_data: {}
+
 services:
-  
   postgres:
     image: postgres:14.1
     container_name: postgres
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_HOST=postgres
-      - POSTGRES_PORT=9932
+      - POSTGRES_DB=postgres
       - POSTGRES_USER=docker
       - POSTGRES_PASSWORD=docker
-      - POSTGRES_DB=postgres
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PORT=9932
     ports:
       - "9932:5432"
+    restart: on-failure
