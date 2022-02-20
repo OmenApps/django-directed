@@ -1,43 +1,86 @@
 # Contributing to django-directed
 
-For development and testing, you can run a Postgres database in Docker Compose. This guide assumes you already have Docker and Docker Compose installed.
+We welcome contributions that meet the goals and standards of this project. Contributions may include bug fixes, feature development, corrections or additional context for the documentation, submission of Issues on GitHub, etc.
 
-Build the Docker Compose container for Postgres:
+For development and testing, you can run your own instance of Postgres (either locally or using a DBaaS), or you can use the provided Docker Compose yaml file to provision a containerized instance and data volume locally.
 
-    docker-compose -f dev.yml up -d --no-deps --force-recreate --build postgres
 
-To check the status of the database container:
+## Using Your Own postgres Instance
 
-    docker ps
+To develop using your own Postgres instance, set the following environmental variables on your machine:
 
-Database connection details:
+- DB_NAME (defaults to "postgres")
+- DB_USER (defaults to "docker")
+- DB_PASSWORD (defaults to "docker")
+- DB_HOST (defaults to "localhost")
+- DB_PORT (defaults to "9932")
 
-    HOST = postgres
-    PORT = 9932
+The process of setting environmental variables varies between different operating systems. Generally, on macOS and Linux, you can use the following convention in the console:
+
+```bash
+export KEY=value
+```
+
+## Using the Provided Docker Compose Postgres Instance
+
+This guide assumes you already have Docker and Docker Compose installed.
+
+### Build & Bring up the Docker Compose container for Postgres:
+
+```bash
+docker-compose -f dev.yml up -d --no-deps --force-recreate --build postgres
+```
+
+These are the database connection details used in dev.yml:
+
+    DB = postgres
     USER = docker
     PASSWORD = docker
-    DB = postgres
+    HOST = postgres
+    PORT = 9932
 
-If you need to remove the container:
+### To check the status of the database container:
 
-    docker-compose -f dev.yml down --rmi all --remove-orphans -v
+```bash
+docker ps
+```
 
-Create a Python virtual environment:
+Once running, you should be able to connect using the test app, psql, or other Postgres tools if desired.
 
-    python3 -m venv myvenv
+### If you need to completely remove the container:
 
-Activate the virtual environment:
+```bash
+docker-compose -f dev.yml down --rmi all --remove-orphans -v
+```
 
-    source myvenv/bin/activate
+## Once you have a Running Postgres Instance
 
-Run the tests:
+### Create a Python virtual environment:
 
-    python runtests.py
+```bash
+python3 -m venv myvenv
+```
 
-Run the django test app:
+### Activate the virtual environment for local development:
 
-    python manage.py check
+```bash
+source myvenv/bin/activate
+```
 
-To build the docs, within the docs directory:
+### Run the tests:
 
-    make html
+```bash
+python runtests.py
+```
+### Check the django test app:
+
+```bash
+python manage.py check
+```
+
+
+## Build the docs, within the docs directory:
+
+```bash
+make html
+```
