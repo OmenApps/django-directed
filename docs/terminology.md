@@ -26,7 +26,7 @@ graph TD;
     
     A--e-->B;
 
-    linkStyle 0 stroke-width:2px,fill:none,stroke:green;
+    linkStyle 0 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Root
@@ -46,6 +46,8 @@ graph TD;
     C-->D;
 
     style A fill:green,stroke:#333,stroke-width:4px;
+    
+    linkStyle default fill:none,stroke:gray
 ```
 
 ## Roots
@@ -66,6 +68,8 @@ graph TD;
 
     style A fill:green,stroke:#333,stroke-width:4px;
     style B fill:green,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
 ```
 
 ## Leaf / Leaves
@@ -88,6 +92,32 @@ graph TD;
 
     style D fill:green,stroke:#333,stroke-width:4px;
     style E fill:green,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
+```
+
+## Island
+
+In a given Graph, an *island* is a node with no parents nor children. Islands have an in-degree of 0 *and* and out-degree of 0. Here, node `E` is an island. There are no edges connecting it to any other node.
+
+*(Note, there is no equivalent for edges. Every edge connects two [or in special cases, more] nodes.)*
+
+```{mermaid}
+graph TD;
+    A((A));
+    B((B));
+    C((C));
+    D((D));
+    E((E));
+    
+    A-->B; %% 0
+    A-->C; %% 1
+    B-->D; %% 2
+    C-->D; %% 3
+
+    style E fill:green,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
 ```
 
 ## Parent / Parents
@@ -104,8 +134,10 @@ graph TD;
     B-->C;
 
     style A fill:#20961d,stroke:#333,stroke-width:4px;
-    style B fill:#f86f06,stroke:#333,stroke-width:4px;
-    style C fill:#eea11c,stroke:#333,stroke-width:4px;
+    style B fill:#bdad01,stroke:#333,stroke-width:4px;
+    style C fill:#f86f06,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
 ```
 
 ## Child / Children
@@ -121,9 +153,11 @@ graph TD;
     A-->B;
     B-->C;
 
-    style A fill:#eea11c,stroke:#333,stroke-width:4px;
-    style B fill:#f86f06,stroke:#333,stroke-width:4px;
+    style A fill:#f86f06,stroke:#333,stroke-width:4px;
+    style B fill:#bdad01,stroke:#333,stroke-width:4px;
     style C fill:#20961d,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
 ```
 
 ## Ancestors
@@ -166,11 +200,12 @@ graph TD;
     style F fill:#f86f06,stroke:#333,stroke-width:4px;
     style E fill:#f86f06,stroke:#333,stroke-width:4px;
 
-    linkStyle 1 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 4 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 6 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 10 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 1 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 4 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 6 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 10 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Descendants
@@ -214,12 +249,13 @@ graph TD;
     style H fill:#f86f06,stroke:#333,stroke-width:4px;
     style I fill:#f86f06,stroke:#333,stroke-width:4px;
 
-    linkStyle 3 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 7 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 8 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 9 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 10 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 3 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 7 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 8 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 9 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 10 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Clan
@@ -263,12 +299,13 @@ graph TD;
     style H fill:#f86f06,stroke:#333,stroke-width:4px;
     style I fill:#f86f06,stroke:#333,stroke-width:4px;
 
-    linkStyle 1 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 4 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 6 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 9 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 10 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 1 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 4 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 6 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 9 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 10 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Siblings
@@ -309,9 +346,10 @@ graph TD;
     style B fill:#f86f06,stroke:#333,stroke-width:4px;
     style E fill:#f86f06,stroke:#333,stroke-width:4px;
 
-    linkStyle 1 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 0 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 4 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 1 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 0 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 4 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Partners
@@ -352,30 +390,18 @@ graph TD;
     style B fill:#f86f06,stroke:#333,stroke-width:4px;
     style E fill:#f86f06,stroke:#333,stroke-width:4px;
 
-    linkStyle 2 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 3 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 6 stroke-width:2px,fill:none,stroke:green;
-```
-
-## Island
-
-A Node with no parents nor children. Islands have an in-degree of 0 *and* and out-degree of 0.
-
-*(Note, there is no equivalent for edges. Every edge connects two [or in special cases, more] nodes.)*
-
-```{mermaid}
-graph TD;
-    A((A));
-
-    style A fill:green,stroke:#333,stroke-width:4px;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 2 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 3 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 6 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Distance
 
-The shortest number of hops from one node to a target node. The distance between node `C` and node `H` is 2. This is because the path from `C` to `F` to `H` involves 2 edges.
+The shortest number of hops from one node to a target node. The *distance* between node `C` and node `H` is 2. This is because the path from `C` to `F` to `H` involves 2 edges.
 
-There is another path from `C` to `H` through nodes `D` and `G`, but that path is longer (3 edges), and when we refer to distance in this project, we always mean the smallest number of hops.
+There is another path from `C` to `H` through nodes `D` and `G`, but that path is longer (3 edges), and when we refer to *distance* in this project, we always mean the smallest number of hops.
 
 ```{mermaid}
 graph TD;
@@ -409,15 +435,16 @@ graph TD;
     style F fill:#f86f06,stroke:#333,stroke-width:4px;
     style H fill:green,stroke:#333,stroke-width:4px;
 
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 9 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 9 stroke-width:3px,fill:none,stroke:green;
 ```
 
 ## Node Depth
 
-The distance of the node from furthest root in the graph. Because this can be a bit challenging to visualize, we ill provide a couple examples.
+The distance of the node from furthest root in the graph. Because this can be a bit challenging to visualize, a few examples are provided below.
 
-Because node `A` is the highest (and only) root in the following graph, its depth is 0.
+Because node `A` is the highest (and only) root in the following graph, its *node depth* is 0.
 
 
 ```{mermaid}
@@ -449,9 +476,11 @@ graph TD;
     J-->K; %% 12
 
     style A fill:green,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
 ```
 
-Using the same graph as before, consider the depth of node `H`. There is only a single root (node `A`) in this graph, and the distance between node `A` and node `H` is 3. So the node depth of node `H` is 3.
+Using the same graph as before, consider the depth of node `H`. There is only a single root (node `A`) in this graph, and the distance between node `A` and node `H` is 3. So the *node depth* of node `H` is 3.
 
 ```{mermaid}
 graph TD;
@@ -486,14 +515,15 @@ graph TD;
     style F fill:#f86f06,stroke:#333,stroke-width:4px;
     style H fill:green,stroke:#333,stroke-width:4px;
 
-    linkStyle 1 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 5 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 9 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 1 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 5 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 9 stroke-width:3px,fill:none,stroke:green;
 ```
 
-Finally, we will look at a more complicated example with multiple roots at different levels. Here we want the node depth of node `F`.
+Finally, we will look at a more complicated example with multiple roots at different levels. Here we want the *node depth* of node `F`.
 
-While both nodes `A` and `D` are roots in this graph (they have in-degree of 0), node `A` has a greater distance from node `F`, so we determine the depth of node `F` from the viewpoint of node `A`. It takes 3 hops to reach node `F` from node `A`, so the node depth of node `F` is 3.
+While both nodes `A` and `D` are roots in this graph (they have in-degree of 0), node `A` has a greater distance from node `F`, so we determine the depth of node `F` from the viewpoint of node `A`. It takes 3 hops to reach node `F` from node `A`, so the *node depth* of node `F` is 3.
 
 ```{mermaid}
 graph TD;
@@ -515,7 +545,8 @@ graph TD;
     style C fill:#f86f06,stroke:#333,stroke-width:4px;
     style F fill:green,stroke:#333,stroke-width:4px;
 
-    linkStyle 0 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 1 stroke-width:2px,fill:none,stroke:green;
-    linkStyle 4 stroke-width:2px,fill:none,stroke:green;
+    linkStyle default fill:none,stroke:gray
+    linkStyle 0 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 1 stroke-width:3px,fill:none,stroke:green;
+    linkStyle 4 stroke-width:3px,fill:none,stroke:green;
 ```
