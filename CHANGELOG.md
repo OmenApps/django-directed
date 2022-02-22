@@ -9,3 +9,8 @@
 
 * Continue work on boilerplate to flesh out the foundations of the project.
 
+
+## 0.1.2 (2022-02-21)
+
+* Add terminology documentation.
+
