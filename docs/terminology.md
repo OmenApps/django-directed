@@ -122,7 +122,11 @@ graph TD;
 
 ## Parent / Parents
 
-Here, node `A` is the *parent* of node `B`, and node `B` is the *parent* of node `C`. Depending on the type of graph, nodes may have zero, one, or multiple parents.
+The *parents* for a given node *x*, if any exist, are those nodes which have a directed edge 'in' to node *x*. In graph theory, this may be refered to as a direct predecessor.
+
+Here, node `A` is a *parent* of node `B`, and node `B` is a *parent* of node `C`. Depending on the type of graph, nodes may have zero, one, or multiple parents.
+
+We also refer to *parent edges*, which are the directed edges themselves which point to the node. In this example, edge `e1` is a *parent edge* of node `B`, and edge `e2` is a *parent edge* of node `C`.
 
 ```{mermaid}
 graph TD;
@@ -130,8 +134,8 @@ graph TD;
     B((B));
     C((C));
     
-    A-->B;
-    B-->C;
+    A--e1-->B;
+    B--e2-->C;
 
     style A fill:#20961d,stroke:#333,stroke-width:4px;
     style B fill:#bdad01,stroke:#333,stroke-width:4px;
@@ -142,7 +146,11 @@ graph TD;
 
 ## Child / Children
 
+The *children* for a given node *x*, if any exist, are those nodes which have a directed edge 'out' from node *x*. In graph theory, this may be refered to as a direct successor.
+
 Here, node `B` is a *child* of node `A`, and node `C` is a *child* of node `B`. Depending on the type of graph, nodes may have zero, one, or multiple children.
+
+We also refer to *children edges*, which are the directed edges themselves which point from the node. In this example, edge `e1` is a *child edge* of node `A`, and edge `e2` is a *child edge* of node `B`.
 
 ```{mermaid}
 graph TD;
@@ -150,8 +158,8 @@ graph TD;
     B((B));
     C((C));
     
-    A-->B;
-    B-->C;
+    A--e1-->B;
+    B--e2-->C;
 
     style A fill:#f86f06,stroke:#333,stroke-width:4px;
     style B fill:#bdad01,stroke:#333,stroke-width:4px;
@@ -162,7 +170,7 @@ graph TD;
 
 ## Ancestors
 
-All nodes in connected paths in a rootward direction.
+All nodes in connected paths in a rootward direction. In graph theory, this may be refered to as predecessors.
 
 In this example, the *ancestors* for node `I` are nodes `A`, `C`, `E`, and `F`.
 
@@ -210,7 +218,7 @@ graph TD;
 
 ## Descendants
 
-All nodes in connected paths in a leafward direction.
+All nodes in connected paths in a leafward direction. In graph theory, this may be refered to as successors.
 
 In this example, the *descendants* for node `C` are nodes `D`, `F`, `G`, `H`, and `I`.
 
@@ -260,7 +268,7 @@ graph TD;
 
 ## Clan
 
-The clan of a node includes all ancestor nodes, the node itself, and all descendant nodes.
+The clan of a node includes all ancestor nodes, the node itself, and all descendant nodes. In graph theory, this can be refered to as the maximal paths through a given node.
 
 In this example, the *clan* for node `F` includes nodes `A`, `C`, `E`, `H`, and `I`.
 

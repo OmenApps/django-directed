@@ -6,8 +6,8 @@
 :caption: "Contents:"
    
 readme
-installation
 terminology
+installation
 usage
 contributing
 authors
