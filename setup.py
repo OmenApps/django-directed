@@ -89,7 +89,7 @@ classifiers = [
 setup(
     name="django-directed",
     version=version,
-    description="""Directed Graphs for Django""",
+    description="""Tools for building, querying, manipulating, and exporting directed graphs with django""",
     long_description=readme + "\n\n" + changelog,
     long_description_content_type="text/markdown",
     author="Jack Linke",

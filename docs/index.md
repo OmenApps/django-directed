@@ -9,7 +9,12 @@ readme
 terminology
 installation
 usage
+building
+querying
+manipulating
+exporting
 contributing
+roadmap
 authors
 changelog
 ```

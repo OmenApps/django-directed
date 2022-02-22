@@ -2,7 +2,10 @@
 
 Learning to use graphs can be challenging because some concepts have multiple equivalent or similar terms and definitions. For instance, the words 'node' and 'vertex' typically mean the same thing, but some industries or fields may prefer one to the other.
 
-To help clarify what is meant throughout this project, we define the following terms and definitions.
+To help clarify what is meant throughout this project, we define the following terms and definitions. We make heavy use of familial terms, which can help with mentally visualizing the concepts.
+
+This document does is not intended as a course in general graph theory. A graph in the context of this project is made up of nodes which are connected by edges. Edges typically link two nodes *asymmetrically* in all of the directed graphs within django-directed.
+
 
 ## Node
 
@@ -96,9 +99,9 @@ graph TD;
     linkStyle default fill:none,stroke:gray
 ```
 
-## Island
+## Orphan
 
-In a given Graph, an *island* is a node with no parents nor children. Islands have an in-degree of 0 *and* and out-degree of 0. Here, node `E` is an island. There are no edges connecting it to any other node.
+In a given Graph, an *orphan* is a node with no parents nor children. Orphans have an in-degree of 0 *and* and out-degree of 0. Here, node `E` is an orphan. There are no edges connecting it to any other node.
 
 *(Note, there is no equivalent for edges. Every edge connects two [or in special cases, more] nodes.)*
 
