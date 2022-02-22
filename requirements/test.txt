@@ -3,5 +3,6 @@ coverage==4.4.1
 django>=2.2
 flake8>=2.1.0
 mock>=1.0.1
+psycopg2-binary>=2.9.3,<3
 tox>=1.7.0
 
