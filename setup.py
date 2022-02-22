@@ -97,7 +97,7 @@ setup(
     license="Apache Software License",
     url="https://github.com/jacklinke/django-directed/",
     project_urls={
-        # 'Documentation': 'https://packaging.python.org/tutorials/distributing-packages/',
+        "Documentation": "https://django-directed.readthedocs.io/en/latest/",
         "Source": "https://github.com/jacklinke/django-directed/",
         "Tracker": "https://github.com/jacklinke/django-directed/issues",
     },

@@ -1,6 +1,8 @@
 # django-directed
 
-Tools for building, querying, manipulating, and exporting directed graphs with django
+Tools for building, querying, manipulating, and exporting directed graphs with django.
+
+Documentation can be found at https://django-directed.readthedocs.io/en/latest/
 
 ## Background
 
@@ -50,7 +52,7 @@ Other things to consider as a possibility:
 Graphs can be used to model an incredibly large range of ideas, physical systems, concepts, web-components, etc. Here is a very incomplete list of some of the ways you might use django-directed, along with the underlying structure that might be best to represent them.
 
 | Use-Cases                                                                                                                           | Potential Data Structure     |
-|-------------------------------------------------------------------------------------------------------------------------------------|------------------------------|
+| ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
 | Threaded discussion comments                                                                                                        | Arborescence                 |
 | Social follows" (which users are following which)"                                                                                  | Directed cyclic graph        |
 | Model of resource flow in gas/electrical/water/sewer distribution systems                                                           | Arborescence                 |
