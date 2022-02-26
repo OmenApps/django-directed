@@ -13,6 +13,7 @@ building
 querying
 manipulating
 exporting
+extending
 contributing
 roadmap
 authors

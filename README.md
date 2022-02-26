@@ -23,7 +23,7 @@ Some of the design decisions here:
 
 Directed graphs in general can solve or model an incredible number of real-world or web-related problems and concepts. This package should be complete enough to perform a majority of tasks needed for working with an assortment of directed graphs in django applications, but it should also be flexible and extensible enough to allow for customization and novel approaches to problems in practical graph application.
 
-### Building Directed Graphs
+## Types of Directed Graphs
 
 The scope of this package includes working with a variety of directed graphs. This includes eventually supporting functionality for each of these types of directed graphs:
 
@@ -33,19 +33,19 @@ The scope of this package includes working with a variety of directed graphs. Th
     - Polytree (aka directed tree, oriented tree, or singly connected network) - DAGs whose underlying undirected graph is a tree
       - Arborescence (or out-tree or rooted tree) (single-rooted polytree)
 
-Other things to consider as a possibility (in suspected order of complexity):
+Other types of graphs to consider supporting (in suspected order of complexity):
 
 - **Subclasses of Arborescence**
   - Directed binary tree
   - Directed quadtree
   - Directed octree
 - **Binary Search Trees (BST)**
-- **Multigraphs** - Grphs where the same pair of nodes may be connected by more than one edge.
+- **Multigraphs** - Graphs where the same pair of nodes may be connected by more than one edge.
   - This might be further constrained in a cyclic graph to limit edges between two nodes to no more than two, with one edge in each direction.
 - **Hypergraphs** - Graphs where edges can join more than just two nodes.
 
 
-For further details on building, querying, manipulating, and exporting graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
+For further details on *building, querying, manipulating, and exporting* graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
 
 
 ## Example Use-Cases of django-directed
@@ -79,7 +79,7 @@ Essentially, just about anything involving causal relationships, hierarchies, or
 ## Why not use a graph database instead?
 
 - Compatibility - Graph databases don't play very nicely with Django and the Django ORM. There are 3rd party packages to shoehorn in the required functionality, but django is designed for relational databases.
-- Simplicity - If most of the work you are doing needs a relational database, mixing an additional database into the project might not be ideal.
+- Simplicity - If most of the work you are doing needs a relational database, mixing an additional entirely different kind of database into the project might not be ideal.
 - Tradeoffs - Graph databases are not a panacea. They bring their own set of pros and cons. Maybe a graph database is ideal for your project. But maybe you'll do just as well using django-directed. I encourage you to read up on the benefits graph databases bring, the issues they solve, and also the areas where they do not perform as well as a relational database.
 
 ## ToDo
