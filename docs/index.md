@@ -3,8 +3,8 @@
 
 ```{toctree}
 :maxdepth: 2
-:caption: "Contents:"
-   
+:caption: "User Guide"
+
 readme
 terminology
 installation
@@ -14,6 +14,21 @@ querying
 manipulating
 exporting
 extending
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: "API"
+
+api/graph
+api/node
+api/edge
+```
+
+```{toctree}
+:maxdepth: 2
+:caption: "Project Details"
+
 contributing
 roadmap
 authors
