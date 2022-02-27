@@ -107,7 +107,7 @@ setup(
     package_dir={"django_directed": "django_directed"},
     include_package_data=True,
     keywords="django-directed, graph, tree, dag, network, directed, acyclic, postgres, cte",
-    python_requires=">=3.6, <4",
+    python_requires=">=3.7, <4",
     classifiers=classifiers,
     install_requires=requirements,
     extras_require=get_extras_require(extras_requirements_path),
