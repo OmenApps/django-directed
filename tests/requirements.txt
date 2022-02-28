@@ -1,5 +1,5 @@
 # Your app requirements.
--r ../requirements_test.txt
+-r ../requirements/test.txt
 
 # Your app in editable mode.
 -e ../
