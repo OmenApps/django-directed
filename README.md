@@ -78,19 +78,19 @@ Essentially, just about anything involving causal relationships, hierarchies, or
 
 A series of example apps demonstrating vaious aspects and techniques of using django-directed.
 
-- Airports - An app demonstrating one method of working with multidimensional graphs to model airports with a common set of nodes, and edges for each of the connecting airlines.
-- Electrical Grids - Demonstrate graphs of neighborhood electrical connections and meters.
-- Family Trees - Demonstrates building family trees for multiple mythological families.
-- Forums - Forums and threaded comments.
-- NetworkX Graphs - Demonstration of using NetworkX alongside django-directed.
+- **Airports** - An app demonstrating one method of working with multidimensional graphs to model airports with a common set of nodes, and edges for each of the connecting airlines.
+- **Electrical Grids** - Demonstrate graphs of neighborhood electrical connections and meters.
+- **Family Trees** - Demonstrates building family trees for multiple mythological families.
+- **Forums** - Forums and threaded comments.
+- **NetworkX Graphs** - Demonstration of using NetworkX alongside django-directed.
 
 See the [Example Apps](https://github.com/jacklinke/django-directed/tree/main/tests/example) folder.
 
 ## Why not use a graph database instead?
 
-- Compatibility - Graph databases don't play very nicely with Django and the Django ORM. There are 3rd party packages to shoehorn in the required functionality, but django is designed for relational databases.
-- Simplicity - If most of the work you are doing needs a relational database, mixing an additional entirely different kind of database into the project might not be ideal.
-- Tradeoffs - Graph databases are not a panacea. They bring their own set of pros and cons. Maybe a graph database is ideal for your project. But maybe you'll do just as well using django-directed. I encourage you to read up on the benefits graph databases bring, the issues they solve, and also the areas where they do not perform as well as a relational database.
+- **Compatibility** - Graph databases don't play very nicely with Django and the Django ORM. There are 3rd party packages to shoehorn in the required functionality, but django is designed for relational databases.
+- **Simplicity** - If most of the work you are doing needs a relational database, mixing an additional entirely different kind of database into the project might not be ideal.
+- **Tradeoffs** - Graph databases are not a panacea. They bring their own set of pros and cons. Maybe a graph database is ideal for your project. But maybe you'll do just as well using django-directed. I encourage you to read up on the benefits graph databases bring, the issues they solve, and also the areas where they do not perform as well as a relational database.
 
 ## ToDo
 
