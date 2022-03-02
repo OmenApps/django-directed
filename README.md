@@ -44,9 +44,7 @@ Other types of graphs to consider supporting (in suspected order of complexity):
   - This might be further constrained in a cyclic graph to limit edges between two nodes to no more than two, with one edge in each direction.
 - **Hypergraphs** - Graphs where edges can join more than just two nodes.
 
-
 For further details on *building, querying, manipulating, and exporting* graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
-
 
 ## Example Use-Cases of django-directed
 
@@ -75,6 +73,18 @@ Graphs can be used to model an incredibly large range of ideas, physical systems
 | Storing information about phone calls, emails, or other interactions between people                                                 | Directed cyclic graph or DAG |
 
 Essentially, just about anything involving causal relationships, hierarchies, or dependencies can be modeled with a directed graph. This package may be useful if you need to persist that information for use with django applications.
+
+# Example apps
+
+A series of example apps demonstrating vaious aspects and techniques of using django-directed.
+
+- Airports - An app demonstrating one method of working with multidimensional graphs to model airports with a common set of nodes, and edges for each of the connecting airlines.
+- Electrical Grids - Demonstrate graphs of neighborhood electrical connections and meters.
+- Family Trees - Demonstrates building family trees for multiple mythological families.
+- Forums - Forums and threaded comments.
+- NetworkX Graphs - Demonstration of using NetworkX alongside django-directed.
+
+See the [Example Apps](https://github.com/jacklinke/django-directed/tree/main/tests/example) folder.
 
 ## Why not use a graph database instead?
 
