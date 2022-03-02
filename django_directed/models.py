@@ -75,7 +75,47 @@ def create_dag_service(config):
     return DAGService(config)
 
 
+class PolytreeService:
+    def __init__(self, config):
+        self._instance = None
+        self._config = config
+
+    def graph(self):
+        return polytree_graph_factory(config=self._config)
+
+    def edge(self):
+        return polytree_edge_factory(config=self._config)
+
+    def node(self):
+        return polytree_node_factory(config=self._config)
+
+
+def create_polytree_service(config):
+    return PolytreeService(config)
+
+
+class ArborescenceService:
+    def __init__(self, config):
+        self._instance = None
+        self._config = config
+
+    def graph(self):
+        return arborescence_graph_factory(config=self._config)
+
+    def edge(self):
+        return arborescence_edge_factory(config=self._config)
+
+    def node(self):
+        return arborescence_node_factory(config=self._config)
+
+
+def create_arborescence_service(config):
+    return ArborescenceService(config)
+
+
 class DirectedFactory:
+    """Registers django-directed services"""
+
     def __init__(self):
         self._builders = {}
 
@@ -92,10 +132,12 @@ class DirectedFactory:
         return self.create(service_id, **kwargs)
 
 
-# Register factory services
+# Register default factory services
 factory = DirectedFactory()
 factory.register("CYCLIC", create_cyclic_service)
 factory.register("DAG", create_dag_service)
+factory.register("POLYTREE", create_polytree_service)
+factory.register("ARBORESCENCE", create_arborescence_service)
 
 
 def main():
