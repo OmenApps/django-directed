@@ -74,7 +74,7 @@ Graphs can be used to model an incredibly large range of ideas, physical systems
 
 Essentially, just about anything involving causal relationships, hierarchies, or dependencies can be modeled with a directed graph. This package may be useful if you need to persist that information for use with django applications.
 
-# Example apps
+## Example apps
 
 A series of example apps demonstrating vaious aspects and techniques of using django-directed.
 
