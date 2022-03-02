@@ -33,8 +33,11 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_directed",
-    # if your app has other dependencies that need to be added to the site
-    # they should be added here
+    "tests.example.airports",
+    "tests.example.electrical_grids",
+    "tests.example.family_trees",
+    "tests.example.forums",
+    "tests.example.networkx_graphs",
 ]
 
 MIDDLEWARE = [

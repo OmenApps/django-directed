@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class NetworkxGraphsConfig(AppConfig):
+class ElectricalGridConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "tests.example.networkx_graphs"
+    name = "tests.example.electrical_grids"
