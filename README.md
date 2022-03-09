@@ -1,6 +1,6 @@
 # django-directed
 
-Tools for building, querying, manipulating, and exporting directed graphs with django.
+Tools for building, querying, manipulating, and exporting [directed graphs](https://en.wikipedia.org/wiki/Directed_graph) with django.
 
 Documentation can be found at https://django-directed.readthedocs.io/en/latest/
 
@@ -13,10 +13,10 @@ This project is very much a Work In Progress, and is not production-ready. Once 
 Graphs in django-directed are constructed with three models (or potentially more in case of extended features).
 
 - **Graph**: Represents a connected graph of nodes and edges. It makes it easy to associate metadata with a particular graph and to run commands and queries limited to a subset of all the Edges and Nodes in the database.
-- **Edge**: Connects Nodes to one another within the graph.
+- **Edge**: Connects Nodes to one another within a particular Graph instance.
 - **Node**: A node can belong to more than one Graph. This allows us to represent multi-dimensional or multi-layered graphs.
 
-django-directed includes model factories for building various types of directed graphs.
+django-directed includes model factories for building various types of directed graphs. As an example, imagine a project in which you display family trees and also provide a searchable interface for research papers about family trees, where papers can be linked to previous papers that they cite. Both of these concepts can be represented by a [Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph), and within your project you could create a set of DAG models for the family tree app and another set of DAG models for the academic papers app.
 
 
 ## Quickstart
@@ -31,7 +31,7 @@ pip install django-directed
 
 ### Create the concrete models
 
-Using the Directed Acyclic Graph (DAG) factory, create a set of concrete Graph, Edge, and Node models for your project. Perform the following steps in your app's models.py
+Using the DAG factory, create a set of concrete Graph, Edge, and Node models for your project. Perform the following steps in your app's models.py
 
 Build a configuration object that will be passed into the factory. Here, we are using the simplest configuration which specifies the model (with `appname.ModelName`), but uses the default values for all other configuration options.
 

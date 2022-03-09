@@ -25,21 +25,21 @@ Directed graphs in general can solve or model an incredible number of real-world
 The scope of this package includes working with a variety of directed graphs. This includes eventually supporting functionality for each of these types of directed graphs:
 
 - Directed graphs aka DiGraphs
-  - Directed cyclic graph
-  - Directed acyclic graph (DAG)
-    - Polytree (aka directed tree, oriented tree, or singly connected network) - DAGs whose underlying undirected graph is a tree
-      - Arborescence (or out-tree or rooted tree) (single-rooted polytree)
+  - [Directed cyclic graph]()
+  - [Directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
+    - [Polytree](https://en.wikipedia.org/wiki/Polytree) (aka directed tree, oriented tree, or singly connected network) - DAGs whose underlying undirected graph is a tree
+      - [Arborescence](https://en.wikipedia.org/wiki/Arborescence_(graph_theory)) (or out-tree or rooted tree) (single-rooted polytree)
 
-Other types of graphs to consider supporting (in suspected order of complexity):
+Other types of graphs to consider supporting (in expected order of complexity):
 
 - **Subclasses of Arborescence**
-  - Directed binary tree
-  - Directed quadtree
-  - Directed octree
-- **Binary Search Trees (BST)**
-- **Multigraphs** - Graphs where the same pair of nodes may be connected by more than one edge.
+  - Directed [binary tree](https://en.wikipedia.org/wiki/Binary_tree)
+  - Directed [quadtree](https://en.wikipedia.org/wiki/Quadtree)
+  - Directed [octree](https://en.wikipedia.org/wiki/Octree)
+- **[Binary Search Trees (BST)](https://en.wikipedia.org/wiki/Binary_search_tree)**
+- **[Multigraph](https://en.wikipedia.org/wiki/Multigraph)** - Graphs where the same pair of nodes may be connected by more than one edge.
   - This might be further constrained in a cyclic graph to limit edges between two nodes to no more than two, with one edge in each direction.
-- **Hypergraphs** - Graphs where edges can join more than just two nodes.
+- **[Hypergraph](https://en.wikipedia.org/wiki/Hypergraph)** - Graphs where edges can join more than just two nodes.
 
 For further details on *building, querying, manipulating, and exporting* graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
 
@@ -73,11 +73,16 @@ Essentially, just about anything involving causal relationships, hierarchies, or
 
 ## Further reading and resources
 
-These resources are fantastic for learning about working with graphs in databases and related topics.
+These resources are fantastic for learning about working with graphs in databases and related topics. They are listed in no particular order, and I do not have any affiliation with the authors, publishers, or bookstores.
 
 ### Books
 
 - Joe Celko's trees and hierarchies in SQL for smarties [[B&N](https://www.barnesandnoble.com/w/joe-celkos-trees-and-hierarchies-in-sql-for-smarties-joe-celko/1100697038?ean=9780123877567), [Amazon](https://www.amazon.com/Hierarchies-Smarties-Kaufmann-Management-Systems/dp/0123877334/)]
 - Effective SQL: 61 Specific Ways to Write Better SQL (Chapter 10) [[B&N](https://www.barnesandnoble.com/w/effective-sql-john-viescas/1124176119?ean=9780134578897), [Amazon](https://www.amazon.com/Effective-SQL-Specific-Software-Development/dp/0134578899/)]
+- Algorithms for Decision Making (not yet released for print, but available to read at the [book's website](https://algorithmsbook.com/)) [[MIT Press](https://mitpress.mit.edu/books/algorithms-decision-making)]
 
-### Blog posts and articles
+### Blog posts, slide shows, and articles
+
+- [A Model to Represent Directed Acyclic Graphs (DAG) on SQL Databases](https://www.codeproject.com/Articles/22824/A-Model-to-Represent-Directed-Acyclic-Graphs-DAG-o)
+- [Graph Algorithms in a Database: Recursive CTEs and Topological Sort with Postgres](https://www.fusionbox.com/blog/detail/graph-algorithms-in-a-database-recursive-ctes-and-topological-sort-with-postgres/620/)
+- [Postgres: A Graph Database (by Greg Spiegelberg at Pivotal)](https://postgresconf.org/system/events/document/000/001/522/Postrgres_Graph_DB.pdf)
