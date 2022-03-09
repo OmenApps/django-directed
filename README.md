@@ -185,18 +185,20 @@ Here is the resulting data in each model (ignoring the custom fields added in th
      11 |  8        |  10      | b4 c2   |  1
      12 |  9        |  10      | c1 c2   |  2
 
-### Diagramatic View
+### Graph visualization
 
 ```{note}
-In the diagram below, both of the green nodes (c1) refer to the same Node instance, which is associated with two different graph instances. Likewise, both blue nodes (c2) refer to the same Node instance.
+In the visualized graph below, both of the green nodes (c1) refer to the same Node instance, which is associated with two different graph instances. Likewise, both blue nodes (c2) refer to the same Node instance.
 ```
 
 ```{note}
-This mermaid.js diagram may not display properly in Sphinx. See the [django-directed README on GitHub](https://github.com/jacklinke/django-directed/blob/main/README.md) to see it displayed correctly.
+The mermaid.js diagrams require different markup for GitHub markdown compared to display within ReadTheDocs. Both versions are included here, but one will likely appear as code depending on where you are viewing this file.
 ```
 
-```mermaid
-graph TD
+#### Graph for display on GitHub
+
+```{mermaid}
+graph TD;
     root((root));
     a1((a1));
     a2((a2));
@@ -231,6 +233,47 @@ graph TD
 
     linkStyle default fill:none,stroke:gray
 ```
+
+
+#### Graph for display on ReadTheDocs
+
+```mermaid
+graph TD;
+    root((root));
+    a1((a1));
+    a2((a2));
+    a3((a3));
+    b1((b1));
+    b2((b2));
+    b3((b3));
+    b4((b4));
+    c1((c1));
+    c2((c2));
+    c1X((c1));
+    c2X((c2));
+    
+    root-->a1;
+    root-->a2;
+    root-->a3;
+    a1-->b1;
+    a1-->b2;
+    a2-->b2;
+    a3-->b3;
+    a3-->b4;
+    b3-->c1;
+    b3-->c2;
+    b4-->c2;
+
+    c1X-->c2X;
+
+    style c1 fill:#48A127,stroke:#333,stroke-width:4px;
+    style c1X fill:#48A127,stroke:#333,stroke-width:4px;
+    style c2 fill:#279BA1,stroke:#333,stroke-width:4px;
+    style c2X fill:#279BA1,stroke:#333,stroke-width:4px;
+
+    linkStyle default fill:none,stroke:gray
+```
+
 
 ### Find the shortest path between two nodes
 
