@@ -191,8 +191,12 @@ Here is the resulting data in each model (ignoring the custom fields added in th
 In the diagram below, both of the green nodes (c1) refer to the same Node instance, which is associated with two different graph instances. Likewise, both blue nodes (c2) refer to the same Node instance.
 ```
 
-```{mermaid}
-graph TD;
+```{note}
+This mermaid.js diagram may not display properly in Sphinx. See the [django-directed README on GitHub](https://github.com/jacklinke/django-directed/blob/main/README.md) to see it displayed correctly.
+```
+
+```mermaid
+graph TD
     root((root));
     a1((a1));
     a2((a2));
@@ -224,7 +228,6 @@ graph TD;
     style c1X fill:#48A127,stroke:#333,stroke-width:4px;
     style c2 fill:#279BA1,stroke:#333,stroke-width:4px;
     style c2X fill:#279BA1,stroke:#333,stroke-width:4px;
-
 
     linkStyle default fill:none,stroke:gray
 ```
