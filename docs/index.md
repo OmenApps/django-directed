@@ -6,6 +6,7 @@
 :caption: "User Guide"
 
 readme
+about
 terminology
 installation
 usage
@@ -14,6 +15,7 @@ querying
 manipulating
 exporting
 extending
+plugin_hooks
 ```
 
 ```{toctree}

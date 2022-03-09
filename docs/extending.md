@@ -1,8 +1,14 @@
 # Extending Functionality in django-directed
 
-You can extend django directed with new graph types, which can be used in a django package or directly within your project.
+Beyond making modifications directly within your project (e.g. inheriting and extending the provided models & managers), there are two ways of extending django-directed for use in additional projects or for community use.
 
-Start by creating new factory functions for the graph, edge, and node. The GraphConfig object is passed into each function, and can be used to customizing functionality of the returned model classes.
+## Custom model factories
+
+You can create new django-directed graph types with your own graph factories, which can be used directly within your project or in an installable django package for reuse.
+
+### Create a new factory
+
+Start by creating new factory functions for the graph, edge, and node. Like any other graph in django-directed, the GraphConfig object is passed into each function, and is used for customizing functionality of the returned model classes.
 
 ```python
 from django.db import models
@@ -55,11 +61,14 @@ def new_type_node_factory(config):
     return NewTypeNode()
 ```
 
-Create the service, with which the new graph types can be registered.
+### Create the service
+
+The service makes it possible to register the new factory within django-directed.
 
 ```python
 class NewTypeService:
-    # Returns the actual Graph, Edge, and Node models
+    """Returns the actual Graph, Edge, and Node models"""
+    
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -78,7 +87,9 @@ def create_new_type_service(config):
     return NewTypeService(config)
 ```
 
-Register your new graph service.
+### Register your new graph service
+
+Now that the factory and service for our new graph type has been built, we can register the service in our django project and make use of the resulting models.
 
 ```python
 factory.register("NEW_TYPE", create_new_type_service)
@@ -96,3 +107,8 @@ MyNewTypeEdge = new_type.edge()
 MyNewTypeNode = new_type.node()
 ```
 
+## Pluggy Plugins
+
+Throughout django-directed, [pluggy](https://pluggy.readthedocs.io/en/stable/) hooks have been added to 
+
+## Combined approach

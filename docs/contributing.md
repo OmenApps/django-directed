@@ -5,7 +5,9 @@ We welcome contributions that meet the goals and standards of this project. Cont
 For development and testing, you can run your own instance of Postgres (either locally or using a DBaaS), or you can use the provided Docker Compose yaml file to provision a containerized instance and data volume locally.
 
 
-## Using Your Own postgres Instance
+## Getting up-and-running
+
+### Using Your Own postgres Instance
 
 To develop using your own Postgres instance, you may set the following environmental variables on your machine:
 
@@ -22,11 +24,11 @@ The process of setting environmental variables varies between different operatin
 export KEY=value
 ```
 
-## Using the Provided Docker Compose Postgres Instance
+### Using the Provided Docker Compose Postgres Instance
 
 This guide assumes you already have [Docker and Docker Compose installed](https://docs.docker.com/compose/install/).
 
-### Build & Bring up the Docker Compose container for Postgres services:
+#### Build & Bring up the Docker Compose container for Postgres services:
 
 Run the following command to build and bring up the postgres service.
 
@@ -49,7 +51,7 @@ Note that the docker-compose postgres service creates two databases:
 
 *(The PL/Python procedural language is used in tests of advanced backend functionality which can make use of python-based graph libraries)*
 
-### To check the status of the database container:
+#### To check the status of the database container:
 
 ```bash
 docker ps
@@ -57,39 +59,74 @@ docker ps
 
 Once running, you should be able to connect using the test app, psql, or other Postgres management tools if desired.
 
-### To completely remove the container and associated data:
+#### To completely remove the container and associated data:
 
 ```bash
 docker-compose -f dev.yml down --rmi all --remove-orphans -v
 ```
 
-## Once you have a Running Postgres Instance
+### Once you have a Running Postgres Instance
 
-### Create a Python virtual environment:
+#### Create a Python virtual environment:
 
 ```bash
 python3 -m venv myvenv
 ```
 
-### Activate the virtual environment for local development:
+#### Activate the virtual environment for local development:
 
 ```bash
 source myvenv/bin/activate
 ```
 
-### Run the tests:
+#### Run the tests:
 
 ```bash
 python runtests.py
 ```
-### Check the django test app:
+#### Check the django test app:
 
 ```bash
 python manage.py check
 ```
 
 
-## Build the docs, within the docs directory:
+## Package Structure
+
+Because django-directed supports multiple types of directed graphs, the underlying functionality can be a bit complex to understand at first. This shouldn't matter much if you are only building, querying, or manipulating graphs.
+
+If you want to contribute to development of this package or extend the functionality of django-directed by creating installable apps and plugins for new graph types or customized graph behavior, it is critical to understand what functionality exists where.
+
+| Folder/File                        |                                                                              |
+| ---------------------------------- | ---------------------------------------------------------------------------- |
+| 📦django_directed                   |                                                                              |
+| ┣ 📂models                          |                                                                              |
+| ┃ ┣ 📜__init__.py                   |                                                                              |
+| ┃ ┣ 📜abstract_base_models.py       | Lowest-level models (used for validating model type inheritance)             |
+| ┃ ┣ 📜abstract_base_graph_models.py | Provides functionality common to all graphs                                  |
+| ┃ ┣ 📜abstract_graph_models.py      | Breaks out functionality specific to each graph type                         |
+| ┃ ┗ 📜model_factory.py              | Provides the means of creating multiple graph moseld for each graph type     |
+| ┣ 📂static                          | Package Static files                                                         |
+| ┣ 📂templates                       | Package Default Templates                                                    |
+| ┣ 📂templatetags                    | Package Templatetags                                                         |
+| ┣ 📜__init__.py                     |                                                                              |
+| ┣ 📜admin.py                        | Tools for working with graphs in Django admin                                |
+| ┣ 📜apps.py                         |                                                                              |
+| ┣ 📜context_managers.py             | Utility context manager to simplify reference to a particular graph instance |
+| ┣ 📜exceptions.py                   | Exceptions specific to this package                                          |
+| ┣ 📜fields.py                       | CurrentGraphField which simplifies working with Edge and Node models         |
+| ┣ 📜manager_methods.py              | WIP                                                                          |
+| ┣ 📜model_methods.py                | WIP                                                                          |
+| ┣ 📜query_utils.py                  | Uilities for building and manipulating queries                               |
+| ┣ 📜queryset_methods.py             | WIP                                                                          |
+| ┣ 📜urls.py                         |                                                                              |
+| ┣ 📜validators.py                   | WIP                                                                          |
+| ┗ 📜views.py                        |                                                                              |
+
+
+## Build the docs
+
+Within the docs directory, run this from the console:
 
 ```bash
 make html
