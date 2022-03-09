@@ -258,7 +258,7 @@ with graph_scope(another_graph):
 
 *Output*: `<QuerySet [<NetworkNode: c1>, <NetworkNode: c2>]>`
 
-For additional methods of querying, see the API docs for [Graph](./api/graph), [Edge](./api/edge), and [Node](./api/node).
+For additional methods of querying, see the API docs for [Graph](https://django-directed.readthedocs.io/en/latest/api/graph.html), [Edge](https://django-directed.readthedocs.io/en/latest/api/edge.html), and [Node](https://django-directed.readthedocs.io/en/latest/api/node.html).
 
 ## Example apps
 
