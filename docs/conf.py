@@ -31,9 +31,14 @@ import django_directed
 extensions = [
     "sphinxcontrib.mermaid",
     "myst_parser",
-    "tasklist",
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
+]
+
+myst_enable_extensions = [
+    "dollarmath",
+    "fieldlist",
+    "tasklist",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
