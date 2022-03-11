@@ -12,9 +12,9 @@ Internally, django-directed uses a combination of factories and abstract models,
 
 Within a Django project utilizing django-directed the graph, edges, and nodes are represented as distinct concrete models, and multiple types of graphs can be built within the same project. These three work together to provide a consolidated API for working with graphs.
 
-- a Graph model (extended from AbstractGraph)
-- an Edge model (extended from AbstractEdge)
-- a Node model (extended from AbstractNode)
+- a Graph model (extended from BaseGraph and then AbstractGraph)
+- an Edge model (extended from BaseEdge and then AbstractEdge)
+- a Node model (extended from BaseNode and then AbstractNode)
 
 ```{mermaid}
 erDiagram
@@ -22,7 +22,6 @@ erDiagram
         any id
     }
     Node {
-        Graph id PK
         ManyToManyField children
     }
     Edge {
@@ -31,11 +30,10 @@ erDiagram
         Node child FK "child Node"
     }
 
-    Graph ||--o{ Node : ""
     Graph ||--o{ Edge : ""
     Node ||--o{ Edge : parent
     Node ||--o{ Edge : child
     Node }|--|{ Node : "M2M through Edge"
 ```
 
-Work In Progress
+The connected graph is defined by the Edges associated with a Graph instance. This does mean an additional join on the Gaph table, but for typical use-cases the ratio of Graph instances to those of Nodes and Edges is tiny.

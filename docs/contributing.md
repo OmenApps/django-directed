@@ -79,12 +79,29 @@ python3 -m venv myvenv
 source myvenv/bin/activate
 ```
 
+#### Install packages for development and testing:
+
+This installs all packages needed for development and testing, and installs django-directed in editable mode from the local repo.
+
+```bash
+pip install -r ./tests/requirements.txt
+```
+
+#### Install pre-commits:
+
+These ensure code is formatted correctly upon commit. See [the pre-commit docs](https://pre-commit.com/) for more information.
+
+```bash
+pre-commit install
+```
+
 #### Run the tests:
 
 ```bash
-python runtests.py
+pytest
 ```
-#### Check the django test app:
+
+#### Check the django test project:
 
 ```bash
 python manage.py check
