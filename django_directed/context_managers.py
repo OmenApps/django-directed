@@ -3,7 +3,7 @@ from contextlib import contextmanager
 
 from django.db import models
 
-from django_directed.models.abstract_base_graph_models import BaseGraph
+from django_directed.models.abstract_base_models import BaseGraph
 
 try:
     from asgiref.local import Local as local
