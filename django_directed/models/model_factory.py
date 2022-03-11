@@ -1,12 +1,29 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
-from django_directed.components import *
+from django.apps import apps
+from django.db import models
+
+from django_directed.models.abstract_graph_models import (
+    arborescence_edge_factory,
+    arborescence_graph_factory,
+    arborescence_node_factory,
+    cyclic_edge_factory,
+    cyclic_graph_factory,
+    cyclic_node_factory,
+    dag_edge_factory,
+    dag_graph_factory,
+    dag_node_factory,
+    polytree_edge_factory,
+    polytree_graph_factory,
+    polytree_node_factory,
+)
 
 
 @dataclass
 class GraphConfig:
     """
-    A GraphConfig object is used to configure details about the directed graph components.
+    A GraphConfig object is used to configure details about the
+      directed graph components.
     """
 
     # Maximum number of children allowed for each node in the graph.
@@ -14,30 +31,40 @@ class GraphConfig:
     #   A value of `0` is ignored, and resolves to `-1`
     children_number_max: int = -1
 
-    # If True and `children_number_max` is greater than 0, resulting graphs
-    #   will be required to have exactly `children_number_max` children
-    children_number_strict: bool = False
-
     # Should null be allowed on the `children` field?
-    children_blank_null = True
+    children_blank_null: bool = True
+
+    # Should multiple Edges be allowed between a pair of Nodes?
+    allow_duplicate_edges: bool = False
 
     # Base model types
-    graph_base_model = models.Model
-    edge_base_model = models.Model
-    node_base_model = models.Model
+    graph_base_model: models.Model = models.Model
+    edge_base_model: models.Model = models.Model
+    node_base_model: models.Model = models.Model
 
     # Models
-    #   Model names should be `appname.ModelName` or `ModelName` if used within the same file
-    graph_model_list = []
-    edge_model_list = []
-    node_model_name = ""
+    #   Model names should be `appname.ModelName`
+    graph_fullname: str = ""
+    edge_fullname: str = ""
+    node_fullname: str = ""
 
+    # Plugins
+    #   A list or tuple of plugins to use with this type of graph
+    graph_plugins: list = field(default_factory=list)
 
-default_config = GraphConfig()
+    # def get_graph_model_class(self):
+    #     return self.get_model_class(self.graph_fullname)
+
+    # def get_edge_model_class(self):
+    #     return self.get_model_class(self.edge_fullname)
+
+    # def get_node_model_class(self):
+    #     return self.get_model_class(self.node_fullname)
 
 
 class CyclicService:
-    # Returns the actual Graph, Edge, and Node models
+    """Returns the actual Graph, Edge, and Node models"""
+
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -57,6 +84,8 @@ def create_cyclic_service(config):
 
 
 class DAGService:
+    """Returns the actual Graph, Edge, and Node models"""
+
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -76,6 +105,8 @@ def create_dag_service(config):
 
 
 class PolytreeService:
+    """Returns the actual Graph, Edge, and Node models"""
+
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -95,6 +126,8 @@ def create_polytree_service(config):
 
 
 class ArborescenceService:
+    """Returns the actual Graph, Edge, and Node models"""
+
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -113,7 +146,7 @@ def create_arborescence_service(config):
     return ArborescenceService(config)
 
 
-class DirectedFactory:
+class DirectedServiceFactory:
     """Registers django-directed services"""
 
     def __init__(self):
@@ -133,30 +166,8 @@ class DirectedFactory:
 
 
 # Register default factory services
-factory = DirectedFactory()
+factory = DirectedServiceFactory()
 factory.register("CYCLIC", create_cyclic_service)
 factory.register("DAG", create_dag_service)
 factory.register("POLYTREE", create_polytree_service)
 factory.register("ARBORESCENCE", create_arborescence_service)
-
-
-def main():
-    # Create Cyclic factory instance
-    cyclic = factory.create("CYCLIC", config=default_config)
-
-    # Create model instances
-    MyCyclicGraph = cyclic.graph()
-    MyCyclicEdge = cyclic.edge()
-    MyCyclicNode = cyclic.node()
-
-    # Create DAG factory instance
-    dag = factory.create("DAG", config=default_config)
-
-    # Create model instances
-    MyDAGGraph = dag.graph()
-    MyDAGEdge = dag.edge()
-    MyDAGNode = dag.node()
-
-
-if __name__ == "__main__":
-    main()

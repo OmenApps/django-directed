@@ -1,1 +1,3 @@
-from django.db import models
+import logging
+
+logger = logging.getLogger("django_directed")

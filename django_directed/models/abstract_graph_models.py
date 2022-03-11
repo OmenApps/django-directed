@@ -1,37 +1,7 @@
-from django.db import models
+from django.core.exceptions import ValidationError
+from django.db.models import Case, When
 
-
-class AbstractGraph(models.Model):
-    """
-    Creates "Abstract Graph Model"
-    """
-
-    class Meta:
-        abstract = True
-
-
-class AbstractEdge(models.Model):
-    """
-    Creates "Abstract Edge Model"
-    """
-
-    # ToDo: Need FK or M2M to graph based on config.
-    #   Also, should there be a through-model for M2M?
-
-    class Meta:
-        abstract = True
-
-
-class AbstractNode(models.Model):
-    """
-    Creates "Abstract Node Model"
-    """
-
-    # ToDo: Need FK or M2M to graph based on config.
-    #   Also, should there be a through-model for M2M?
-
-    class Meta:
-        abstract = True
+from django_directed.models.abstract_base_graph_models import base_edge, base_graph, base_node
 
 
 def cyclic_graph_factory(config):
@@ -40,11 +10,11 @@ def cyclic_graph_factory(config):
     Abstract methods of the Graph base model are implemented.
     """
 
-    class CyclicGraph(AbstractGraph):
+    class CyclicGraph(base_graph(config)):
         class Meta:
             abstract = True
 
-    return CyclicGraph()
+    return CyclicGraph
 
 
 def cyclic_edge_factory(config):
@@ -53,11 +23,11 @@ def cyclic_edge_factory(config):
     Abstract methods of the Edge base model are implemented.
     """
 
-    class CyclicEdge(AbstractEdge):
+    class CyclicEdge(base_edge(config)):
         class Meta:
             abstract = True
 
-    return CyclicEdge()
+    return CyclicEdge
 
 
 def cyclic_node_factory(config):
@@ -66,13 +36,11 @@ def cyclic_node_factory(config):
     Abstract methods of the Node base model are implemented.
     """
 
-    # edge_model_table = config.edge_model._meta.db_table
-
-    class CyclicNode(AbstractNode):
+    class CyclicNode(base_node(config)):
         class Meta:
             abstract = True
 
-    return CyclicNode()
+    return CyclicNode
 
 
 def dag_graph_factory(config):
@@ -81,11 +49,11 @@ def dag_graph_factory(config):
     Abstract methods of the Graph base model are implemented.
     """
 
-    class DAGGraph(AbstractGraph):
+    class DAGGraph(base_graph(config)):
         class Meta:
             abstract = True
 
-    return DAGGraph()
+    return DAGGraph
 
 
 def dag_edge_factory(config):
@@ -94,11 +62,11 @@ def dag_edge_factory(config):
     Abstract methods of the Edge base model are implemented.
     """
 
-    class DAGEdge(AbstractEdge):
+    class DAGEdge(base_edge(config)):
         class Meta:
             abstract = True
 
-    return DAGEdge()
+    return DAGEdge
 
 
 def dag_node_factory(config):
@@ -107,13 +75,11 @@ def dag_node_factory(config):
     Abstract methods of the Node base model are implemented.
     """
 
-    # edge_model_table = config.edge_model._meta.db_table
-
-    class DAGNode(AbstractNode):
+    class DAGNode(base_node(config)):
         class Meta:
             abstract = True
 
-    return DAGNode()
+    return DAGNode
 
 
 def polytree_graph_factory(config):
@@ -122,11 +88,11 @@ def polytree_graph_factory(config):
     Abstract methods of the Graph base model are implemented.
     """
 
-    class PolytreeGraph(AbstractGraph):
+    class PolytreeGraph(base_graph(config)):
         class Meta:
             abstract = True
 
-    return PolytreeGraph()
+    return PolytreeGraph
 
 
 def polytree_edge_factory(config):
@@ -135,11 +101,11 @@ def polytree_edge_factory(config):
     Abstract methods of the Edge base model are implemented.
     """
 
-    class PolytreeEdge(AbstractEdge):
+    class PolytreeEdge(base_edge(config)):
         class Meta:
             abstract = True
 
-    return PolytreeEdge()
+    return PolytreeEdge
 
 
 def polytree_node_factory(config):
@@ -148,13 +114,11 @@ def polytree_node_factory(config):
     Abstract methods of the Node base model are implemented.
     """
 
-    # edge_model_table = config.edge_model._meta.db_table
-
-    class PolytreeNode(AbstractNode):
+    class PolytreeNode(base_node(config)):
         class Meta:
             abstract = True
 
-    return PolytreeNode()
+    return PolytreeNode
 
 
 def arborescence_graph_factory(config):
@@ -163,11 +127,11 @@ def arborescence_graph_factory(config):
     Abstract methods of the Graph base model are implemented.
     """
 
-    class ArborescenceGraph(AbstractGraph):
+    class ArborescenceGraph(base_graph(config)):
         class Meta:
             abstract = True
 
-    return ArborescenceGraph()
+    return ArborescenceGraph
 
 
 def arborescence_edge_factory(config):
@@ -176,11 +140,11 @@ def arborescence_edge_factory(config):
     Abstract methods of the Edge base model are implemented.
     """
 
-    class ArborescenceEdge(AbstractEdge):
+    class ArborescenceEdge(base_edge(config)):
         class Meta:
             abstract = True
 
-    return ArborescenceEdge()
+    return ArborescenceEdge
 
 
 def arborescence_node_factory(config):
@@ -189,10 +153,8 @@ def arborescence_node_factory(config):
     Abstract methods of the Node base model are implemented.
     """
 
-    # edge_model_table = config.edge_model._meta.db_table
-
-    class ArborescenceNode(AbstractNode):
+    class ArborescenceNode(base_node(config)):
         class Meta:
             abstract = True
 
-    return ArborescenceNode()
+    return ArborescenceNode
