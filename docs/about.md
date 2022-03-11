@@ -25,7 +25,7 @@ Directed graphs in general can solve or model an incredible number of real-world
 The scope of this package includes working with a variety of directed graphs. This includes eventually supporting functionality for each of these types of directed graphs:
 
 - Directed graphs aka DiGraphs
-  - [Directed cyclic graph]()
+  - [Directed cyclic graph](https://en.wikipedia.org/wiki/Cyclic_graph)
   - [Directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
     - [Polytree](https://en.wikipedia.org/wiki/Polytree) (aka directed tree, oriented tree, or singly connected network) - DAGs whose underlying undirected graph is a tree
       - [Arborescence](https://en.wikipedia.org/wiki/Arborescence_(graph_theory)) (or out-tree or rooted tree) (single-rooted polytree)
