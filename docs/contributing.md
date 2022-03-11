@@ -70,13 +70,13 @@ docker-compose -f dev.yml down --rmi all --remove-orphans -v
 #### Create a Python virtual environment:
 
 ```bash
-python3 -m venv myvenv
+python3 -m venv venv
 ```
 
 #### Activate the virtual environment for local development:
 
 ```bash
-source myvenv/bin/activate
+source venv/bin/activate
 ```
 
 #### Install packages for development and testing:

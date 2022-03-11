@@ -6,16 +6,13 @@
 :caption: "User Guide"
 
 readme
-about
 terminology
+concepts
 installation
-usage
 building
 querying
 manipulating
 exporting
-extending
-plugin_hooks
 ```
 
 ```{toctree}
@@ -29,9 +26,18 @@ api/edge
 
 ```{toctree}
 :maxdepth: 2
+:caption: "Advanced Usage"
+
+extending
+plugin_hooks
+contributing
+```
+
+```{toctree}
+:maxdepth: 2
 :caption: "Project Details"
 
-contributing
+about
 roadmap
 authors
 changelog

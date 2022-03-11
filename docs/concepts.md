@@ -1,8 +1,4 @@
-# Usage
-
-To use django-directed in a project, once installed via pip...
-
----
+# Concepts
 
 Internally, django-directed uses a combination of factories and abstract models, which makes possible:
 
