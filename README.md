@@ -4,8 +4,10 @@ Tools for building, querying, manipulating, and exporting [directed graphs](http
 
 Documentation can be found at https://django-directed.readthedocs.io/en/latest/
 
-```{caution} 
-This project is very much a Work In Progress, and is not production-ready. Once it is is a more complete state, it will be moved to the github Watervize organization for long-term development and maintenance.
+```{caution}
+This project is very much a Work In Progress, and is not production-ready.
+Once it is is a more complete state, it will be moved to the github Watervize
+organization for long-term development and maintenance.
 ```
 
 ## Fundamentals
@@ -121,7 +123,7 @@ with graph_scope(first_graph):
     root.add_child(a2)
 
     # You can add from either side of the relationship
-    a3.add_parent(root)  
+    a3.add_parent(root)
 
     b1.add_parent(a1)
     a1.add_child(b2)
@@ -150,8 +152,8 @@ Here is the resulting data in each model (ignoring the custom fields added in th
 
      id
     ----
-      1 
-      2 
+      1
+      2
 
 #### myapp.DAGNode
 
@@ -211,7 +213,7 @@ graph TD;
     c2((c2));
     c1X((c1));
     c2X((c2));
-    
+
     root-->a1;
     root-->a2;
     root-->a3;
@@ -250,7 +252,7 @@ graph TD;
     c2((c2));
     c1X((c1));
     c2X((c2));
-    
+
     root-->a1;
     root-->a2;
     root-->a3;
@@ -277,7 +279,7 @@ graph TD;
 
 First, let us try to get the shortest path from `c1` and `c2` on `first_graph`, where no path exists:
 
-```python 
+```python
 with graph_scope(first_graph):
     c1 = DAGNode.objects.get(name="c1")
     c2 = DAGNode.objects.get(name="c2")
