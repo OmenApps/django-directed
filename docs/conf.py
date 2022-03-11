@@ -31,6 +31,7 @@ import django_directed
 extensions = [
     "sphinxcontrib.mermaid",
     "myst_parser",
+    "tasklist",
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
 ]
