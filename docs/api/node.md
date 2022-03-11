@@ -7,6 +7,7 @@
 ### Methods used for building/manipulating
 
 ### Methods returning a queryset of Nodes
+
 - roots(node=None)
 - leaves(node=None)
 
@@ -24,7 +25,7 @@
 
 ```{py:function} add_child(child, **kwargs)
 
-Provided with a Node instance, attaches that instance as a child to the current Node instance
+Provided with a Node instance, attaches that instance as a child to the current Node instance.
 
 :param Node child: The Node to be added as a child
 :return: The newly created Edge between self and child
@@ -33,42 +34,105 @@ Provided with a Node instance, attaches that instance as a child to the current 
 
 ```{py:function} add_children(children, **kwargs)
 
-Provided with a QuerySet of Node instances, attaches those instances as children of the current Node instance
+Provided with a QuerySet of Node instances, attaches those instances as children of the current Node instance.
 
 :param QuerySet children: The Nodes to be added as children
 :return: The newly created Edges between self and children
 :rtype: list
 ```
 
-- remove_child(child, delete_node=False)
-- remove_children(children, delete_node=False)
-- remove_all_children(delete_node=False)
-- 
-- add_parent(parent, *args, **kwargs)
-- add_parents(parent, *args, **kwargs)
-- remove_parent(parent, delete_node=False)
-- remove_parents(parents, delete_node=False)
-- remove_all_parents(delete_node=False)
+```{py:function} remove_child(child, delete_node=False)
+
+Removes the edge connecting this node to child if a child Node instance is provided. Optionally deletes the child node as well.
+
+:param Node child: The Node to be removed as a child
+:return: None
+:rtype: None
+```
+
+```{py:function} remove_children(children, **kwargs)
+
+Provided with a QuerySet of Node instances, removes those instances as children of the current Node instance.
+
+:param QuerySet children: The Nodes to be removed as children
+:return: None
+:rtype: None
+```
+
+```{py:function} remove_all_children(delete_node=False)
+
+Removes all children of the current Node instance, optionally deleting self as well.
+
+:param QuerySet children: The Nodes to be removed as children
+:return: None
+:rtype: None
+```
+
+```{py:function} add_parent(parent, **kwargs)
+
+Provided with a Node instance, attaches that instance as a parent to the current Node instance.
+
+:param Node parent: The Node to be added as a parent
+:return: The newly created Edge between self and parent
+:rtype: Edge
+```
+
+```{py:function} add_parents(parents, **kwargs)
+
+Provided with a QuerySet of Node instances, attaches those instances as parents of the current Node instance.
+
+:param QuerySet parents: The Nodes to be added as parents
+:return: The newly created Edges between self and parents
+:rtype: list
+```
+
+```{py:function} remove_parent(parent, delete_node=False)
+
+Removes the edge connecting this node to parent if a parent Node instance is provided. Optionally deletes the parent node as well.
+
+:param Node parent: The Node to be removed as a parent
+:return: None
+:rtype: None
+```
+
+```{py:function} remove_parents(parents, **kwargs)
+
+Provided with a QuerySet of Node instances, removes those instances as parents of the current Node instance.
+
+:param QuerySet parents: The Nodes to be removed as parents
+:return: None
+:rtype: None
+```
+
+```{py:function} remove_all_parents(delete_node=False)
+
+Removes all parents of the current Node instance, optionally deleting self as well.
+
+:param QuerySet parents: The Nodes to be removed as parents
+:return: None
+:rtype: None
+```
 
 ### Methods returning a queryset of Nodes
+
 - ancestors(**kwargs)
 - self_and_ancestors(**kwargs)
 - ancestors_and_self(**kwargs)
 - descendants(**kwargs)
-- descendants_count(self)
+- descendants_count()
 - self_and_descendants(**kwargs)
 - descendants_and_self(**kwargs)
 - clan(**kwargs)
-- siblings(self)
-- siblings_and_self(self)
-- partners(self)
-- partners_count(self)
-- partners_and_self(self)
+- siblings()
+- siblings_and_self()
+- partners()
+- partners_count()
+- partners_and_self()
 - path(ending_node, **kwargs)
 - paths(ending_node, **kwargs)
 - connected_graph(**kwargs)
-- roots(self)
-- leaves(self)
+- roots()
+- leaves()
 
 - * Others to consider:
 - immediate_family (parents, self and childred)
@@ -77,28 +141,32 @@ Provided with a QuerySet of Node instances, attaches those instances as children
 - cousins
 
 ### Methods returning a queryset of Edges
-- descendants_edges(self)
-- ancestors_edges(self)
-- clan_edges(self)
+
+- descendants_edges()
+- ancestors_edges()
+- clan_edges()
 
 ### Methods returning a Boolean
+
 - path_exists_from(starting_node, **kwargs)
 - path_exists_to(ending_node, **kwargs)
-- is_root(self)
-- is_leaf(self)
-- is_island(self)
+- is_root()
+- is_leaf()
+- is_island()
 - is_ancestor_of(ending_node, **kwargs)
 - is_descendant_of(ending_node, **kwargs)
 - is_sibling_of(ending_node)
 - is_partner_of(ending_node)
 
-### Methods returning other valuesancestors_count(self)
-- clan_count(self)
-- siblings_count(self)
+### Methods returning other values
+
+- ancestors_count()
+- clan_count()
+- siblings_count()
 - distance(ending_node, **kwargs)
-- node_depth(self)
+- node_depth()
 - connected_graph_node_count(**kwargs)
-- descendants_tree(self)
-- ancestors_tree(self)
+- descendants_tree()
+- ancestors_tree()
 
 
