@@ -27,9 +27,8 @@
 
 Provided with a Node instance, attaches that instance as a child to the current Node instance.
 
-:param Node child: The Node to be added as a child
-:return: The newly created Edge between self and child
-:rtype: Edge
+:param: - **child** (*Node*) - The Node to be added as a child
+:return: *Edge* The newly created Edge between self and child
 ```
 
 ```{py:function} add_children(children, **kwargs)
@@ -134,7 +133,7 @@ Removes all parents of the current Node instance, optionally deleting self as we
 - roots()
 - leaves()
 
-- * Others to consider:
+- *Others to consider:*
 - immediate_family (parents, self and childred)
 - piblings (aka: aunts/uncles)
 - niblings (aka: nieces/nephews)
