@@ -20,4 +20,4 @@ formats: all
 # Python requirements required to build your docs
 python:
    install:
-   - requirements: requirements/dev.txt
+   - requirements: requirements/test.txt
