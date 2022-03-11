@@ -27,17 +27,21 @@
 
 Provided with a Node instance, attaches that instance as a child to the current Node instance.
 
-:param: - **child** (*Node*) - The Node to be added as a child
-:return: *Edge* The newly created Edge between self and child
+:Parameters:
+  - **child** (*Node*) - The Node to be added as a child
+:Return:
+  *Edge* - The newly created Edge between self and child
 ```
 
 ```{py:function} add_children(children, **kwargs)
 
 Provided with a QuerySet of Node instances, attaches those instances as children of the current Node instance.
 
-:param QuerySet children: The Nodes to be added as children
-:return: The newly created Edges between self and children
-:rtype: list
+:Parameters:
+
+  - **children** (*QuerySet*) The Nodes to be added as children
+
+:Return: *list* - The newly created Edges between self and children
 ```
 
 ```{py:function} remove_child(child, delete_node=False)
