@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.db import models
 
-from django_directed.models.model_factory import GraphConfig, factory
+from django_directed.config import GraphConfig
+from django_directed.models.model_factory import factory
 
 my_config = GraphConfig(
     graph_fullname="airports.AirlineGraph",
