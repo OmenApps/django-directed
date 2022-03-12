@@ -9,15 +9,21 @@
 ### Methods used for building/manipulating
 
 - add_node() add node to graph, optionally providing a list of parent nodes
-- remove_node() removes nodes to graphs
+- remove_nodes(nodes) removes nodes from the graph
 - add_edge() adds connections or paths between nodes in graphs
 - remove_edges(edges) removes connection or paths between nodes in graphs
 
-### Methods returning a queryset of Nodes
+### Methods returning a QuerySet of Nodes
 
-### Methods returning a queryset of Edges
+None
+
+### Methods returning a QuerySet of Edges
+
+None
 
 ### Methods returning a Boolean
+
+None
 
 ### Methods returning other values
 
@@ -44,9 +50,15 @@
 
 ### Methods used for building/manipulating an instance
 
-### Methods returning a queryset of Nodes
+None
 
-### Methods returning a queryset of Edges
+### Methods returning a QuerySet of Nodes
+
+None
+
+### Methods returning a QuerySet of Edges
+
+None
 
 ### Methods returning a Boolean
 
@@ -66,5 +78,4 @@ Provided with two Node instances, checks if a connection or path exists between 
 
 ### Methods returning other values
 
-
-
+None

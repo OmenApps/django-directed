@@ -107,6 +107,12 @@ pytest
 coverage run -m pytest
 ```
 
+#### Create html coverage report:
+
+```bash
+coverage html
+```
+
 #### Check the django test project:
 
 ```bash

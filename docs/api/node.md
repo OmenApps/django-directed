@@ -6,6 +6,8 @@
 
 ### Methods used for building/manipulating
 
+None
+
 ### Methods returning a queryset of Nodes
 
 ```{py:function} roots(node=None)
@@ -28,9 +30,15 @@ Returns a QuerySet of all leaf nodes (nodes with no children) in the Node model.
 
 ### Methods returning a queryset of Edges
 
+None
+
 ### Methods returning a Boolean
 
+None
+
 ### Methods returning other values
+
+None
 
 
 
