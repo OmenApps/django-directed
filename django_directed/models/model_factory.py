@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from typing import Union
 
 from django.apps import apps
 from django.db import models
@@ -17,49 +18,6 @@ from django_directed.models.abstract_graph_models import (
     polytree_graph_factory,
     polytree_node_factory,
 )
-
-
-@dataclass
-class GraphConfig:
-    """
-    A GraphConfig object is used to configure details about the
-      directed graph components.
-    """
-
-    # Maximum number of children allowed for each node in the graph.
-    #   A value of `-1` means any number of children are allowed.
-    #   A value of `0` is ignored, and resolves to `-1`
-    children_number_max: int = -1
-
-    # Should null be allowed on the `children` field?
-    children_blank_null: bool = True
-
-    # Should multiple Edges be allowed between a pair of Nodes?
-    allow_duplicate_edges: bool = False
-
-    # Base model types
-    graph_base_model: models.Model = models.Model
-    edge_base_model: models.Model = models.Model
-    node_base_model: models.Model = models.Model
-
-    # Models
-    #   Model names should be `appname.ModelName`
-    graph_fullname: str = ""
-    edge_fullname: str = ""
-    node_fullname: str = ""
-
-    # Plugins
-    #   A list or tuple of plugins to use with this type of graph
-    graph_plugins: list = field(default_factory=list)
-
-    # def get_graph_model_class(self):
-    #     return self.get_model_class(self.graph_fullname)
-
-    # def get_edge_model_class(self):
-    #     return self.get_model_class(self.edge_fullname)
-
-    # def get_node_model_class(self):
-    #     return self.get_model_class(self.node_fullname)
 
 
 class CyclicService:

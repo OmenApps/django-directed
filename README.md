@@ -38,7 +38,8 @@ Using the DAG factory, create a set of concrete Graph, Edge, and Node models for
 Build a configuration object that will be passed into the factory. Here, we are using the simplest configuration which specifies the model (with `appname.ModelName`), but uses the default values for all other configuration options.
 
 ```python
-from django_directed.models import GraphConfig
+from django_directed.config import GraphConfig
+
 
 my_config = GraphConfig(
     graph_model_name="myapp.DAGGraph",
@@ -50,6 +51,10 @@ my_config = GraphConfig(
 Create the concrete models from a model factory service. In this example, we are adding some fields as an example of what you might do in your own application.
 
 ```python
+from django.db import models
+from django_directed.models.model_factory import factory
+
+
 # Create DAG factory instance
 dag = factory.create("DAG", config=my_config)
 
@@ -63,7 +68,7 @@ class DAGEdge(dag.edge()):
     weight = models.SmallIntegerField(default=1)
 
     def save(self, *args, **kwargs):
-        self.name = f"{self.parent.name} {self.child.name}"
+        self.name = f"{self.parent.name} -to- {self.child.name}"
         super().save(*args, **kwargs)
 
 
@@ -85,7 +90,7 @@ python manage.py makemigrations
 python manage.py migrate
 ```
 
-### Build out a basic graph
+### Build a couple graphs using our DAG models
 
 ```{tip}
 We are using the `graph_context_manager` here, which is provided in django-directed for convenience. If you decide not to use this context manager, you need to provide the graph instance when creating or querying with Nodes and Edges.
@@ -93,12 +98,13 @@ We are using the `graph_context_manager` here, which is provided in django-direc
 
 ```bash
 from django_directed.context_managers import graph_scope
+
 from myapp.models import DAGGraph, DAGEdge, DAGNode
 
 
 # Create a graph instance
 first_graph = DAGGraph.objects.create()
-# Creating a second graph instance, which will share nodes with first_graph
+# Create a second graph instance, which will share nodes with first_graph
 another_graph = DAGGraph.objects.create()
 
 with graph_scope(first_graph):
@@ -144,7 +150,7 @@ with graph_scope(another_graph):
     c1.add_child(c2)
 ```
 
-### Resulting Model Data
+### Resulting model data
 
 Here is the resulting data in each model (ignoring the custom fields added in the concrete model definitions).
 
