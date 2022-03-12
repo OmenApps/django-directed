@@ -12,22 +12,17 @@ from django_directed.models.abstract_base_models import BaseEdge, BaseGraph, Bas
 from django_directed.query_utils import _ordered_filter
 
 
-def get_model_class(self, model_fullname: str) -> models.Model:
+def get_model_class(model_fullname: str) -> models.Model:
     """
     Provided with a model fullname (`app_name.ModelName`), Returns
         the associated model class
     """
     split_names = model_fullname.split(".")
     if not len(split_names) == 2:
-        raise ImproperlyConfigured("Model fullnames in graph config must be specified as " "'app_name.ModeName'")
+        raise ImproperlyConfigured("Model fullnames in graph config must be specified as 'app_name.ModeName'")
 
     app_name, model_name = split_names
 
-    # if not apps.is_installed(app_name):
-    #     raise AppNotInstalledException(
-    #         f"Application '{app_name}' is not installed, but was "
-    #         "refered to in graph configuration"
-    #     )
     try:
         model_class = apps.get_model(app_name, model_name)
     except (LookupError, ValueError) as e:
@@ -165,7 +160,7 @@ def base_node(config):
             model class of that instance, and then returns the associated field name, else None.
             """
             if fk_instance is not None:
-                edge_model = get_model_class(edge_model_name)
+                edge_model = get_model_class(config.edge_fullname)
                 for field in edge_model._meta.get_fields():
                     if field.related_model is fk_instance._meta.model:
                         # Return the first field that matches
