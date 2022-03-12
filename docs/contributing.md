@@ -101,6 +101,12 @@ pre-commit install
 pytest
 ```
 
+#### Run code coverage report:
+
+```bash
+coverage run -m pytest
+```
+
 #### Check the django test project:
 
 ```bash

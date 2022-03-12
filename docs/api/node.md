@@ -8,8 +8,23 @@
 
 ### Methods returning a queryset of Nodes
 
-- roots(node=None)
-- leaves(node=None)
+```{py:function} roots(node=None)
+
+Returns a QuerySet of all root nodes (nodes with no parents) in the Node model. If a node instance is specified, returns only the roots for that node.
+
+:param Node node: (optional)
+:return: None
+:rtype: QuerySet
+```
+
+```{py:function} leaves(node=None)
+
+Returns a QuerySet of all leaf nodes (nodes with no children) in the Node model. If a node instance is specified, returns only the leaves for that node.
+
+:param Node node: (optional)
+:return: None
+:rtype: QuerySet
+```
 
 ### Methods returning a queryset of Edges
 
@@ -41,6 +56,24 @@ Provided with a QuerySet of Node instances, attaches those instances as children
 :rtype: list
 ```
 
+```{py:function} add_parent(parent, **kwargs)
+
+Provided with a Node instance, attaches that instance as a parent to the current Node instance.
+
+:param Node parent: The Node to be added as a parent
+:return: The newly created Edge between self and parent
+:rtype: Edge
+```
+
+```{py:function} add_parents(parents, **kwargs)
+
+Provided with a QuerySet of Node instances, attaches those instances as parents of the current Node instance.
+
+:param QuerySet parents: The Nodes to be added as parents
+:return: The newly created Edges between self and parents
+:rtype: list
+```
+
 ```{py:function} remove_child(child, delete_node=False)
 
 Removes the edge connecting this node to child if a child Node instance is provided. Optionally deletes the child node as well.
@@ -66,24 +99,6 @@ Removes all children of the current Node instance, optionally deleting self as w
 :param QuerySet children: The Nodes to be removed as children
 :return: None
 :rtype: None
-```
-
-```{py:function} add_parent(parent, **kwargs)
-
-Provided with a Node instance, attaches that instance as a parent to the current Node instance.
-
-:param Node parent: The Node to be added as a parent
-:return: The newly created Edge between self and parent
-:rtype: Edge
-```
-
-```{py:function} add_parents(parents, **kwargs)
-
-Provided with a QuerySet of Node instances, attaches those instances as parents of the current Node instance.
-
-:param QuerySet parents: The Nodes to be added as parents
-:return: The newly created Edges between self and parents
-:rtype: list
 ```
 
 ```{py:function} remove_parent(parent, delete_node=False)
@@ -131,8 +146,26 @@ Removes all parents of the current Node instance, optionally deleting self as we
 - path(ending_node, **kwargs)
 - paths(ending_node, **kwargs)
 - connected_graph(**kwargs)
-- roots()
-- leaves()
+
+
+```{py:function} roots(node=None)
+
+Returns a QuerySet of all root nodes, if any, for the current Node.
+
+:param Node node: (optional)
+:return: None
+:rtype: QuerySet
+```
+
+```{py:function} leaves(node=None)
+
+Returns a QuerySet of all leaf nodes, if any, for the current Node.
+
+:param Node node: (optional)
+:return: None
+:rtype: QuerySet
+```
+
 
 - *Others to consider:*
 - immediate_family (parents, self and childred)
