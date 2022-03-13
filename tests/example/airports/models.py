@@ -5,11 +5,12 @@ from django_directed.config import GraphConfig
 from django_directed.models.model_factory import factory
 
 my_config = GraphConfig(
+    graph_type="CYCLIC",
     graph_fullname="airports.AirlineGraph",
     edge_fullname="airports.AirRouteEdge",
     node_fullname="airports.AirportNode",
 )
-cyclic = factory.create("CYCLIC", config=my_config)
+cyclic = factory.get(config=my_config)
 
 
 class AirlineGraph(cyclic.graph()):

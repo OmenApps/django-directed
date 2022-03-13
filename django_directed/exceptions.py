@@ -39,3 +39,11 @@ class AppNotInstalledException(Exception):
     """
 
     pass
+
+
+class ServiceDoesNotExistException(Exception):
+    """
+    Used when refering to an application that is not yet installed
+    """
+
+    pass

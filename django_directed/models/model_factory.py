@@ -1,9 +1,7 @@
-from dataclasses import dataclass, field
-from typing import Union
+from dataclasses import dataclass
+from enum import Enum
 
-from django.apps import apps
-from django.db import models
-
+from django_directed.exceptions import ServiceDoesNotExistException
 from django_directed.models.abstract_graph_models import (
     arborescence_edge_factory,
     arborescence_graph_factory,
@@ -110,17 +108,29 @@ class DirectedServiceFactory:
     def __init__(self):
         self._builders = {}
 
+    def services_list(self):
+        # Return list of registered services
+        return list(self._builders.keys())
+
+    def services_enum(self):
+        # Return enum of registered services
+        graph_type_names = [(name, name) for name in self.services_list()]
+        return Enum(value="Graph Types", names=graph_type_names)
+
     def register(self, key, builder):
+        # Registers model factory services
         self._builders[key] = builder
 
-    def create(self, key, **kwargs):
+    def _create(self, config, **kwargs):
+        key = config.graph_type.value
         builder = self._builders.get(key)
         if not builder:
-            raise ValueError(key)
-        return builder(**kwargs)
+            raise ServiceDoesNotExistException(f"Service '{key}' not found in list of services")
+        return builder(config, **kwargs)
 
-    def get(self, service_id, **kwargs):
-        return self.create(service_id, **kwargs)
+    def get(self, config: dataclass, **kwargs):
+        # Creates and returns a new model factory for directed graph models
+        return self._create(config, **kwargs)
 
 
 # Register default factory services

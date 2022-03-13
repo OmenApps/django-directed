@@ -35,13 +35,14 @@ pip install django-directed
 
 Using the DAG factory, create a set of concrete Graph, Edge, and Node models for your project. Perform the following steps in your app's models.py
 
-Build a configuration object that will be passed into the factory. Here, we are using the simplest configuration which specifies the model (with `appname.ModelName`), but uses the default values for all other configuration options.
+Build a configuration object that will be passed into the factory. Here, we are using the simplest configuration which specifies the graph type (default options include 'CYCLIC', 'DAG', 'POLYTREE', 'ARBORESCENCE') and the model names (with `appname.ModelName`). We fall back to the default values for all other configuration options.
 
 ```python
 from django_directed.config import GraphConfig
 
 
 my_config = GraphConfig(
+    graph_type="DAG",
     graph_model_name="myapp.DAGGraph",
     edge_model_name="myapp.DAGEdge",
     node_model_name="myapp.DAGNode",
@@ -49,6 +50,7 @@ my_config = GraphConfig(
 ```
 
 Create the concrete models from a model factory service. In this example, we are adding some fields as an example of what you might do in your own application.
+
 
 ```python
 from django.db import models
