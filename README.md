@@ -58,7 +58,7 @@ from django_directed.models.model_factory import factory
 
 
 # Create DAG factory instance
-dag = factory.create("DAG", config=my_config)
+dag = factory.create(config=my_config)
 
 # Create concrete models
 class DAGGraph(dag.graph()):
