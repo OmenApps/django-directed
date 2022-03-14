@@ -1,14 +1,12 @@
 # Edge
 
-**WORK IN PROGRESS**
-
 ## Manager/QuerySet Methods
 
 None
 
 ### Methods used for building/manipulating
 
-- insert_node(edge, node, clone_to_rootside=False, clone_to_leafside=False, pre_save=None, post_save=None)
+None
 
 ### Methods returning a QuerySet of Nodes
 
@@ -16,20 +14,90 @@ None
 
 ### Methods returning a QuerySet of Edges
 
-- descendants_edges(node, **kwargs)
-- ancestors_edges(node, **kwargs)
-- clan_edges(node, **kwargs)
-- path_edges(start_node, end_node, **kwargs)
+
+```{py:function} ancestor_edges(target_node)
+
+All Edge instances which are ancestors of the target Node.
+
+:param Node target_node: The target Node for searching
+:return: Ancestor Edges
+:rtype: QuerySet
+```
+
+
+```{py:function} descendant_edges(target_node)
+
+All Edge instances descended from the target Node.
+
+:param Node target_node: The target Node for searching
+:return: Descendant Edges
+:rtype: QuerySet
+```
+
+
+```{py:function} clan_edges(target_node)
+
+All Edge instances which are ancestors, self, and descendants of the target Node.
+
+:param Node target_node: The target Node for searching
+:return: Clan Edges
+:rtype: QuerySet
+```
+
+
+```{py:function} shortest_path_edges(node_from, node_to)
+
+All Edge instances for the shortest path from node_from to node_to.
+
+:param Node node_from: The starting Node
+:param Node node_to: The ending Node
+:return: Shortest path Edges
+:rtype: QuerySet
+```
+
+
+```{py:function} all_path_edges(node_from, node_to)
+
+All Edge instances for all paths from node_from to node_to.
+
+:param Node node_from: The starting Node
+:param Node node_to: The ending Node
+:return: Edges
+:rtype: QuerySet
+```
+
 
 ### Methods returning a Boolean
 
-- path_is_valid(edges, **kwargs)
+
+```{py:function} path_is_valid()
+
+Verify that the current QuerySet of Edges result in a contiguous path.
+
+:rtype: bool
+```
+
 
 ### Methods returning other values
 
-- from_node_queryset(nodes_queryset)
 
-- sort(edges, **kwargs)
+```{py:function} from_node_queryset(nodes)
+
+Returns all Edge instances where a parent and child Node are within the provided QuerySet of Nodes.
+
+:param QuerySet nodes: Nodes of interest
+:return: Edges with both parent and child Nodes in the provided QuerySet of Nodes
+:rtype: QuerySet
+```
+
+
+```{py:function} sorted()
+
+Sorts the current Edge QuerySet in a rootward direction
+
+:return: Sorted Edges
+:rtype: QuerySet
+```
 
 
 ## Model Methods
@@ -37,18 +105,82 @@ None
 ### Methods used for building/manipulating an instance
 
 
-
 ```{py:function} add_edge(from_node, to_node)
 
-Provided with two Node instances, adds an edge between them.
+Adds an edge between two Node instances.
 
 :param Node node_from: The starting Node
 :param Node node_to: The ending Node
-:return: The newly created Edge
+:return: Newly created Edge
 :rtype: Edge
 ```
 
-- insert_node(node, clone_to_rootside=False, clone_to_leafside=False, pre_save=None, post_save=None)
+
+```{py:function} insert_node(node, clone_to_rootside=False, clone_to_leafside=False, pre_save=None, post_save=None)
+
+Insert a Node into an existing Edge instance.
+
+:param Node node: The Node to insert
+:param bool clone_to_rootside: (optional) Clone properties of the existing Edge to the new rootside Edge
+:param bool clone_to_leafside: (optional) Clone properties of the existing Edge to the new leafside Edge
+:param callable pre_save: (optional) Helper function to modify before saving
+:param callable post_save: (optional) Helper function to modify after saving
+:return: Newly created rootside Edge (parent to the inserted node) and leafside Edge (child to the inserted Node)
+:rtype: tuple
+```
+
+Process:
+
+1. Add a new Edge from the parent Node of the current Edge instance to the provided Node instance, optionally cloning properties of the existing Edge.
+2. Add a new Edge from the provided Node instance to the child Node of the current Edge instance, optionally cloning properties of the existing Edge.
+3. Remove the original Edge instance.
+
+The instance will still exist in memory, though not in database (https://docs.djangoproject.com/en/3.1/ref/models/instances/#refreshing-objects-from-database). Recommend running the following after conducting the deletion:
+
+```python
+del instancename
+```
+
+Cloning will fail if a field has unique=True, so a pre_save function can be passed into this method. Likewise, a post_save function can be passed in to rebuild relationships. For instance, if you have a `name` field that is unique and generated automatically in the model's save() method, you could pass in a the following `pre_save` function to clear the name prior to saving the new Edge instance(s):
+
+```python
+def pre_save(new_edge):
+    new_edge.name = ""
+    return new_edge
+```
+
+A more complete example, where we have models named DAGEdge & DAGNode, and we want to insert a new Node (n2) into Edge e1, while copying e1's field properties (except `name`) to the newly created rootside Edge instance (n1 to n2) is shown below.
+
+    Original        Final
+
+    n1  o           n1  o
+        |                 \
+        |                  o n2
+        |                 /
+    n3  o           n3  o
+
+
+```python
+from myapp.models import DAGEdge, DAGNode
+
+n1 = DAGNode.objects.create(name="n1")
+n2 = DAGNode.objects.create(name="n2")
+n3 = DAGNode.objects.create(name="n3")
+
+# Connect n3 to n1
+n1.add_child(n3)
+
+e1 = DAGEdge.objects.last()
+
+# function to clear the `name` field, which is autogenerated and must be unique
+def pre_save(new_edge):
+    new_edge.name = ""
+    return new_edge
+
+DAGEdge.objects.insert_node(e1, n2, clone_to_rootside=True, pre_save=pre_save)
+```
+
+
 
 ### Methods returning a QuerySet of Nodes
 

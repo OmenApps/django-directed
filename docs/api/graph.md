@@ -4,9 +4,13 @@
 
 ## Manager/QuerySet Methods
 
+For future consideration:
+
 - clone()
 
 ### Methods used for building/manipulating
+
+For future consideration:
 
 - add_node() add node to graph, optionally providing a list of parent nodes
 - remove_nodes(nodes) removes nodes from the graph
@@ -62,19 +66,22 @@ None
 
 ### Methods returning a Boolean
 
-- contains_value() check if a graph instance contains a certain value
-
-
 
 ```{py:function} has_connection(node_from, node_to)
 
-Provided with two Node instances, checks if a connection or path exists between them.
+Checks if a connection or path exists between two Node instances, within the current Graph.
 
 :param Node node_from: The starting Node
 :param Node node_to: The ending Node
 :return: True if path exists from `node_from` to `node_to`
 :rtype: bool
 ```
+
+
+For future consideration:
+
+- contains_value() check if a graph instance contains a certain value
+
 
 ### Methods returning other values
 
