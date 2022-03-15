@@ -27,6 +27,14 @@ def cyclic_edge_factory(config):
         class Meta:
             abstract = True
 
+        def save(self, *args, **kwargs):
+            # Check for self links
+            allow_self_links = config.allow_self_links
+            if not allow_self_links:
+                self.parent.__class__.self_link_check(self.parent, self.child)
+
+            super().save(*args, **kwargs)
+
     return CyclicEdge
 
 
@@ -65,6 +73,12 @@ def dag_edge_factory(config):
     class DAGEdge(base_edge(config)):
         class Meta:
             abstract = True
+
+        def save(self, *args, **kwargs):
+            # Check for circular links
+            self.parent.__class__.circular_check(self.parent, self.child)
+
+            super().save(*args, **kwargs)
 
     return DAGEdge
 
@@ -105,6 +119,12 @@ def polytree_edge_factory(config):
         class Meta:
             abstract = True
 
+        def save(self, *args, **kwargs):
+            # Check for circular links
+            self.parent.__class__.circular_check(self.parent, self.child)
+
+            super().save(*args, **kwargs)
+
     return PolytreeEdge
 
 
@@ -143,6 +163,12 @@ def arborescence_edge_factory(config):
     class ArborescenceEdge(base_edge(config)):
         class Meta:
             abstract = True
+
+        def save(self, *args, **kwargs):
+            # Check for circular links, if needed
+            self.parent.__class__.circular_check(self.parent, self.child)
+
+            super().save(*args, **kwargs)
 
     return ArborescenceEdge
 
