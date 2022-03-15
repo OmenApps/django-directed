@@ -1,5 +1,5 @@
 # App requirements.
 -r ../requirements/test.txt
 
-# Installs django-directed in editable mode.
--e ./
+# Install django-directed in editable mode.
+#-e ./
