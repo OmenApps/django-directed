@@ -18,6 +18,7 @@ class CurrentGraphFKField(models.ForeignKey):
 
     def __init__(self, *args, **kwargs):
         self.on_update = kwargs.pop("on_update", False)
+        self.graph_fullname = kwargs.pop("graph_fullname", None)
 
         if "on_delete" not in kwargs:
             kwargs["on_delete"] = models.CASCADE
@@ -30,7 +31,7 @@ class CurrentGraphFKField(models.ForeignKey):
 
     def pre_save(self, model_instance, add):
         if self.on_update:
-            value = get_current_graph_instance()
+            value = get_current_graph_instance(self.graph_fullname)
             if value is not None:
                 value = value.pk
             setattr(model_instance, self.attname, value)

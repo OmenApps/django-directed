@@ -15,14 +15,14 @@ logger = logging.getLogger("django_directed")
 _threadlocals = local()
 
 
-def _set_current_graph_instance(current_graph_instance):
+def _set_current_graph_instance(graph_fullname, current_graph_instance):
     """Sets the graph in the local thread"""
-    setattr(_threadlocals, "graph", current_graph_instance)
+    setattr(_threadlocals, graph_fullname, current_graph_instance)
 
 
-def get_current_graph_instance():
+def get_current_graph_instance(graph_fullname):
     """Returns the graph if it exists in the local thread"""
-    current_graph_instance = getattr(_threadlocals, "graph", None)
+    current_graph_instance = getattr(_threadlocals, graph_fullname, None)
     return current_graph_instance
 
 
@@ -58,13 +58,15 @@ def graph_scope(graph):
     if not isinstance(graph, BaseGraph):
         raise Exception("Wrong Graph type provided to graph_scope")
 
-    previous = getattr(_threadlocals, "graph", None)
-    _set_current_graph_instance(graph)
+    graph_fullname = f"{graph._meta.app_label}.{graph._meta.label}"
+
+    previous = getattr(_threadlocals, graph_fullname, None)
+    _set_current_graph_instance(graph_fullname=graph_fullname, current_graph_instance=graph)
 
     try:
         yield
     finally:
         if previous is not None:
-            _set_current_graph_instance(previous)
+            _set_current_graph_instance(graph_fullname=graph_fullname, current_graph_instance=previous)
         else:
-            delattr(_threadlocals, "graph")
+            delattr(_threadlocals, graph_fullname)
