@@ -6,7 +6,7 @@ Documentation can be found at https://django-directed.readthedocs.io/en/latest/
 
 ```{caution}
 This project is very much a Work In Progress, and is not production-ready.
-Once it is is a more complete state, it will be moved to the github Watervize
+Once it is in a more complete state, it will be moved to the github Watervize
 organization for long-term development and maintenance.
 ```
 
