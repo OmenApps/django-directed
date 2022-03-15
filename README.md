@@ -1,5 +1,14 @@
 # django-directed
 
+![GitHub branch checks state](https://img.shields.io/github/checks-status/jacklinke/django-directed/main)
+![Read the Docs](https://img.shields.io/readthedocs/django-directed)
+![GitHub last commit](https://img.shields.io/github/last-commit/jacklinke/django-directed)
+![PyPI - License](https://img.shields.io/pypi/l/django-directed)
+![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/jacklinke/django-directed)
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-directed)
+![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-directed)
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?logo=postgresql&logoColor=white)
+
 Tools for building, querying, manipulating, and exporting [directed graphs](https://en.wikipedia.org/wiki/Directed_graph) with django.
 
 Documentation can be found at https://django-directed.readthedocs.io/en/latest/
