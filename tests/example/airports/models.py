@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.db import models
 
 from django_directed.config import GraphConfig
-from django_directed.models.model_factory import factory
+from django_directed.models import directed_factory
 
 my_config = GraphConfig(
     graph_type="CYCLIC",
@@ -10,7 +10,7 @@ my_config = GraphConfig(
     edge_fullname="airports.AirRouteEdge",
     node_fullname="airports.AirportNode",
 )
-cyclic = factory.get(config=my_config)
+cyclic = directed_factory.get(config=my_config)
 
 
 class AirlineGraph(cyclic.graph()):

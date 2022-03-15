@@ -1,9 +1,11 @@
 import re
-from typing import List, Union
+from typing import List, Type, Union
 
+from django.db import models
 from pydantic import BaseModel, validator
 
-from django_directed.models.model_factory import factory
+from django_directed.fields import CurrentGraphFKField
+from django_directed.models import directed_factory
 
 
 def validate_fullname(fullname: str) -> bool:
@@ -29,7 +31,7 @@ class GraphConfig(BaseModel):
 
     # Graph Type
     #   Default types include 'CYCLIC', 'DAG', 'POLYTREE', 'ARBORESCENCE'
-    graph_type: factory.services_enum()
+    graph_type: directed_factory.services_enum()
 
     # Models
     #   Model names should be `appname.ModelName`

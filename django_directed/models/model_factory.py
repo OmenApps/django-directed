@@ -134,8 +134,8 @@ class DirectedServiceFactory:
 
 
 # Register default factory services
-factory = DirectedServiceFactory()
-factory.register("CYCLIC", create_cyclic_service)
-factory.register("DAG", create_dag_service)
-factory.register("POLYTREE", create_polytree_service)
-factory.register("ARBORESCENCE", create_arborescence_service)
+directed_factory = DirectedServiceFactory()
+directed_factory.register("CYCLIC", create_cyclic_service)
+directed_factory.register("DAG", create_dag_service)
+directed_factory.register("POLYTREE", create_polytree_service)
+directed_factory.register("ARBORESCENCE", create_arborescence_service)
