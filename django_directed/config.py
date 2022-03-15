@@ -55,6 +55,46 @@ class GraphConfig(BaseModel):
     #   ToDo: Determine whether to fold this info the models themselves
     allow_duplicate_edges: bool = False
 
+    # Should Nodes be allowed to link back to themselves?
+    #   Only applies to CyclicEdge
+    allow_self_links: bool = False
+
+    # The `children` field in Node defaults to ManyToManyField,
+    #   but can optionally use a subclass of ManyToManyField
+    node_children_m2m_field: Type[models.ManyToManyField] = models.ManyToManyField
+
+    # The `graph` field in Edge defaults to CurrentGraphFKField,
+    #   but can optionally use a subclass of CurrentGraphFKField
+    edge_graph_fk_field: Type[CurrentGraphFKField] = CurrentGraphFKField
+
+    # The `parent`` and `child` fields in Edge default to ForeignKey,
+    #   but can optionally use a subclass of ForeignKey
+    edge_parent_fk_field: Type[models.ForeignKey] = models.ForeignKey
+    edge_child_fk_field: Type[models.ForeignKey] = models.ForeignKey
+
+    class Config:
+        validate_assignment = True
+
+    # Pydantic Validators
+
+    @validator("edge_graph_fk_field", pre=True, always=True)
+    def edge_graph_fk_field_correct_subclass(cls, value):
+        if not issubclass(value, CurrentGraphFKField):
+            raise ValueError("edge_graph_fk_field must be a subclass of CurrentGraphFKField")
+        return value
+
+    @validator("edge_parent_fk_field", "edge_child_fk_field", pre=True, always=True)
+    def edge_parent_child_fk_fields_correct_subclass(cls, value):
+        if not issubclass(value, models.ForeignKey):
+            raise ValueError("edge_parent_fk_field and edge_child_fk_field must be a subclass of ForeignKey")
+        return value
+
+    @validator("node_children_m2m_field", pre=True, always=True)
+    def node_children_m2m_field_is_m2m_subclass(cls, value):
+        if not issubclass(value, models.ManyToManyField):
+            raise ValueError("node_children_m2m_field must be a subclass of ManyToManyField")
+        return value
+
     _validate_graph_fullname = validator("graph_fullname", allow_reuse=True)(validate_fullname)
     _validate_edge_fullname = validator("edge_fullname", allow_reuse=True)(validate_fullname)
     _validate_node_fullname = validator("node_fullname", allow_reuse=True)(validate_fullname)
