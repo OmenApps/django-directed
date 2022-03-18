@@ -41,9 +41,12 @@ class AirRouteEdge(cyclic.edge()):
         verbose_name_plural = "Air Routes (Edges)"
         ordering = ["parent__name"]
 
-    @admin.display(description="String Display")
+    list_display = ("string_display",)
+
     def string_display(self):
         return f"{self.__str__()}"
+
+    string_display.short_description = "String Display"
 
 
 class AirportNode(cyclic.node()):
