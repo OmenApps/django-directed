@@ -1,4 +1,4 @@
-# Contributing to django-directed
+# Contributing
 
 We welcome contributions that meet the goals and standards of this project. Contributions may include bug fixes, feature development, corrections or additional context for the documentation, submission of Issues on GitHub, etc.
 

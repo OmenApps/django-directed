@@ -1,4 +1,4 @@
-# Extending Functionality in django-directed
+# Extending Functionality
 
 Beyond making modifications directly within your project (e.g. inheriting and extending the provided models & managers), there are two ways of extending django-directed for use in additional projects or for community use.
 
