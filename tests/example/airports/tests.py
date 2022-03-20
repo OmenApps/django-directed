@@ -8,6 +8,8 @@ from tests.example.airports.models import AirlineGraph, AirportNode
 
 @pytest.mark.django_db
 def test_airport_models(django_assert_num_queries):
+    """Build and test a single basic directed cyclic graph"""
+
     airline = AirlineGraph.objects.create(name="Test Airport Name", iata="XY", icao="ABC", callsign="Test Callsign")
 
     assert airline.name == "Test Airport Name"
@@ -137,3 +139,9 @@ def test_airport_models(django_assert_num_queries):
     assert airport1.children.first() == airport2
     assert airport1.descendants_count() == 9  # All the other airports are descendants
     assert airport1.children.first().parents.first() == airport1  # airport1's child's parent is airport1
+
+
+@pytest.mark.django_db
+def test_airport_data():
+    """Load fixture data, and test the multi-dimensional aspects of the Graphs"""
+    pass

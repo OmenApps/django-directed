@@ -4,7 +4,11 @@ An app demonstrating one method of working with multidimensional graphs to model
 
 ## Background
 
-WIP
+The app uses a Directed Cyclic Graphs to represent a number of european airlines, airports, and air routes.
+
+- **Airlines** -> **Graph** model instances
+- **Airports** -> **Node** model instances (shared between multiple graphs, since a given airport can service multiple airlines)
+- **Air Routes** -> **Edge** model instances (specific to single graph, since airlines each have their own distinct air routes, even if they might sometimes depart from and arrive at the same airports as another airline)
 
 ## Scope & Goals
 
