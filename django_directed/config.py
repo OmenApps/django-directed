@@ -17,7 +17,7 @@ def validate_fullname(fullname: str) -> bool:
                                 ([a-zA-Z])                      Match 1 [a-zA-Z]
                                             ([a-zA-Z0-9_]+)$    Match 1 or more [a-zA-Z0-9_] at end
     """
-    pattern = re.compile("^([a-z])([a-zA-Z0-9_]+)(\.)([a-zA-Z])([a-zA-Z0-9_]+)$")
+    pattern = re.compile(r"^([a-z])([a-zA-Z0-9_]+)(\.)([a-zA-Z])([a-zA-Z0-9_]+)$")
     if not bool(re.match(pattern, fullname)):
         raise ValueError("Model fullnames should be specified as `appame.ModelName`")
     return fullname
@@ -47,7 +47,7 @@ class GraphConfig(BaseModel):
     # Maximum number of children allowed for each node in the graph.
     #   A value of `None` means any number of children are allowed.
     #   Any value of less than 1 is ignored, and resolves to None
-    children_number_max: Union[int, None] = None
+    children_quantity_max: Union[int, bool] = False
 
     # Should null be allowed on the `children` field?
     #   ToDo: Is this really needed?

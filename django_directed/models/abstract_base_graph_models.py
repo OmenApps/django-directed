@@ -119,6 +119,7 @@ def base_edge(config):
             if not allow_duplicate_edges:
                 self.parent.__class__.duplicate_edge_check(self.parent, self.child)
 
+            self.parent.__class__.children_quantity_check(self.parent)  # ToDo: Needs fixing
             super().save(*args, **kwargs)
 
         def clean_fields(self, exclude=None):
@@ -136,8 +137,18 @@ def base_node(config):
         Creates "Abstract Node Model"
         """
 
-        # edge_model_name = config.edge_fullname
-        # edge_model_table = edge_model._meta.db_table
+        def node_class(self):
+            return get_model_class(config.node_fullname)
+
+        def edge_class(self):
+            return get_model_class(config.edge_fullname)
+
+        def node_table(self):
+            return self.node_class()._meta.db_table
+
+        def edge_table(self):
+            return self.edge_class()._meta.db_table
+
         children_blank_null = config.children_blank_null
 
         GraphAwareManager = get_graph_aware_manager(config)
@@ -157,14 +168,13 @@ def base_node(config):
             related_name="parents",
         )
 
-        @staticmethod
-        def get_foreign_key_field(fk_instance=None):
+        def get_foreign_key_field(self, fk_instance=None):
             """
             Provided a model instance, checks if the edge model has a ForeignKey field to the
             model class of that instance, and then returns the associated field name, else None.
             """
             if fk_instance is not None:
-                edge_model = get_model_class(config.edge_fullname)
+                edge_model = self.edge_class()
                 for field in edge_model._meta.get_fields():
                     if field.related_model is fk_instance._meta.model:
                         # Return the first field that matches
@@ -205,18 +215,18 @@ def base_node(config):
             kwargs.update({"parent": self, "child": child})
 
             cls = self.children.through(**kwargs)
-            return cls.save()
+            cls.save()
+            return cls
 
         def add_children(self, children: models.QuerySet, **kwargs) -> list:
             """
             Provided with a QuerySet of Node instances, attaches those
               instances as children of the current Node instance
             """
-            cls = self.children.through(**kwargs)
             edge_list = []
             for child in children:
-                kwargs.update({"parent": self, "child": child})
-                edge_list.append(cls.save())
+                if child is not None:
+                    edge_list.append(self.add_child(child))
 
             return edge_list
 
@@ -286,6 +296,64 @@ def base_node(config):
 
             return True
 
+        # Pulled from django-postgresql-dag (may need to be moved)
+
+        def raw_queryset(self):
+
+            QUERY = """
+            WITH RECURSIVE traverse({pk_name}, depth) AS (
+                SELECT first.child_id, 1
+                    FROM {relationship_table} AS first
+                    LEFT OUTER JOIN {relationship_table} AS second
+                    ON first.child_id = second.parent_id
+                WHERE first.parent_id = {pk}
+            UNION
+                SELECT DISTINCT child_id, traverse.depth + 1
+                    FROM traverse
+                    INNER JOIN {relationship_table}
+                    ON {relationship_table}.parent_id = traverse.{pk_name}
+                WHERE 1=1
+            )
+            SELECT {pk_name} FROM traverse
+            WHERE depth <= {max_depth}
+            GROUP BY {pk_name}
+            ORDER BY MAX(depth), {pk_name} ASC
+            """
+
+            return self.node_class().objects.raw(
+                QUERY.format(
+                    relationship_table=self.edge_table(),
+                    pk_name=self.get_pk_name(),
+                    pk=self.pk,
+                    max_depth=100,
+                ),
+            )
+
+        def descendants_raw(self, **kwargs):
+            """Returns a raw QuerySet of all nodes in connected paths in a leafward direction"""
+            return self.raw_queryset()
+
+        def descendants(self, **kwargs):
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction"""
+            pks = [item.pk for item in self.descendants_raw(**kwargs)]
+            return self.ordered_queryset_from_pks(pks)
+
+        def descendants_count(self):
+            """Returns an integer number representing the total number of descendant nodes"""
+            return self.descendants().count()
+
+        def self_and_descendants(self, **kwargs):
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction, prepending with self"""
+            pks = [self.pk] + [item.pk for item in self.descendants_raw(**kwargs)]
+            return self.ordered_queryset_from_pks(pks)
+
+        def descendants_and_self(self, **kwargs):
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction, appending with self"""
+            pks = [item.pk for item in self.descendants_raw(**kwargs)] + [self.pk]
+            return self.ordered_queryset_from_pks(pks)
+
+        # Checks
+
         @staticmethod
         def self_link_check(parent, child):
             """Checks that the Node is not linked to itself"""
@@ -313,7 +381,7 @@ def base_node(config):
             """Checks that the Node has no more than the allowed number of children, if specified"""
             children_quantity_max = (
                 config.children_quantity_max
-                if config.children_quantity_max is not None and config.children_quantity_max > 0
+                if config.children_quantity_max and config.children_quantity_max > 0
                 else False
             )
             if children_quantity_max and parent.children.all().count() >= children_quantity_max:
@@ -323,7 +391,6 @@ def base_node(config):
             abstract = True
 
         def save(self, *args, **kwargs):
-            self.parent.__class__.max_children_check()
             super().save(*args, **kwargs)
 
         def clean_fields(self, exclude=None):

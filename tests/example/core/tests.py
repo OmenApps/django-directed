@@ -1,4 +1,6 @@
 import pytest
-from django.test import TestCase
+from django.conf import settings
 
-# Create your tests here.
+
+def test_account_is_configured():
+    assert "tests.example.core" in settings.INSTALLED_APPS
