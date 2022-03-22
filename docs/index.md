@@ -43,5 +43,5 @@ authors
 changelog
 ```
 
-[View this project](https://github.com/OmenApps/django-postgresql-dag) on Github.
+[View this project](https://github.com/jacklinke/django-directed) on Github.
 
