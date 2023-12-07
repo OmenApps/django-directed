@@ -187,7 +187,7 @@ def base_node(config):
             This method is used to get the correct primary key field name for the
             model so that raw queries return the correct information.
             """
-            return self._meta.pk.name
+            return self._meta.pk.attname
 
         def get_pk_type(self):
             """
