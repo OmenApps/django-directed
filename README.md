@@ -314,7 +314,7 @@ with graph_scope(first_graph):
     print(c1.shortest_path(c2))
 ```
 
-_Output_: `django_directed.models.NodeNotReachableException`
+_Output_: `django_directed.models.NodeNotReachableError`
 
 Next, we will perform the same query on `another_graph`, which _does_ have a path from `c1` to `c2` through a single Edge. The value returned is a QuerySet of the Nodes in the path.
 

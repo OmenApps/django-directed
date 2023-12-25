@@ -1,3 +1,4 @@
+"""Context managers for the django_directed app."""
 from __future__ import annotations
 
 import logging
@@ -6,7 +7,7 @@ from typing import TYPE_CHECKING
 
 
 try:
-    from asgiref.local import Local as local
+    from asgiref.local import Local as local  # noqa: N813
 except ImportError:
     from threading import local
 

@@ -1,3 +1,4 @@
+"""Custom model fields for Django Directed.""" ""
 import logging
 
 from django.db import models
@@ -10,13 +11,13 @@ logger = logging.getLogger("django_directed")
 
 
 class CurrentGraphFKField(models.ForeignKey):
-    """ """
+    """A ForeignKey field that defaults to the current Graph instance."""
 
     # ToDo: Need to add formfield() method
 
     description = _("Foreign Key with default to associated Graph model instance")
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):  # noqa: D107
         self.on_update = kwargs.pop("on_update", False)
         self.graph_fullname = kwargs.pop("graph_fullname", None)
 
@@ -30,6 +31,7 @@ class CurrentGraphFKField(models.ForeignKey):
         super().__init__(**kwargs)
 
     def pre_save(self, model_instance, add):
+        """Sets the value of the field on save."""
         if self.on_update:
             value = get_current_graph_instance(self.graph_fullname)
             if value is not None:
@@ -40,6 +42,7 @@ class CurrentGraphFKField(models.ForeignKey):
             return super().pre_save(model_instance, add)
 
     def deconstruct(self):
+        """Deconstructs the field."""
         name, path, args, kwargs = super().deconstruct()
         if self.on_update:
             kwargs["on_update"] = self.on_update

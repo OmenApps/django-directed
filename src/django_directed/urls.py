@@ -1,7 +1,7 @@
-from django.urls import path
-from django.views.generic import TemplateView
+"""Views for the django_directed app.""" ""
+# from django.urls import path
 
-from . import views
+# from . import views
 
 
 app_name = "django_directed"

@@ -1,3 +1,4 @@
+"""Abstract Base Graph Models for Django Directed."""
 from __future__ import annotations
 
 import logging
@@ -25,21 +26,21 @@ class BaseGraph(models.Model):
 
     # ToDo: Make this model a context manager for itself
 
-    class Meta:
+    class Meta:  # noqa: D106
         abstract = True
 
 
 class BaseEdge(models.Model):
     """Base Edge Model lets us verify that a given model instance derives from BaseEdge."""
 
-    class Meta:
+    class Meta:  # noqa: D106
         abstract = True
 
 
 class BaseNode(models.Model):
     """Base Node Model lets us verify that a given model instance derives from BaseNode."""
 
-    class Meta:
+    class Meta:  # noqa: D106
         abstract = True
 
 
@@ -53,8 +54,8 @@ def get_model_class(model_fullname: str) -> models.Model:
 
     try:
         model_class = apps.get_model(app_name, model_name)
-    except (LookupError, ValueError) as e:
-        raise ImproperlyConfigured(e)
+    except (LookupError, ValueError) as err:
+        raise ImproperlyConfigured from err
 
     return model_class
 
@@ -64,6 +65,7 @@ def get_graph_aware_queryset(config: GraphConfig):
 
     class GraphAwareQuerySet(models.QuerySet):
         """A QuerySet that is aware of the current graph instance."""
+
         def bulk_create(self, objs, batch_size=None, ignore_conflicts=False):
             objs = list(objs)
             for obj in objs:
@@ -79,6 +81,7 @@ def get_graph_aware_manager(config: GraphConfig):
 
     class GraphAwareManager(models.Manager):
         """A Manager that is aware of the current graph instance."""
+
         pass
         # def get_queryset(self):
         #     graph = get_current_graph_instance(graph_fullname=config.graph_fullname)
@@ -93,6 +96,7 @@ def base_graph(config: GraphConfig):
 
     class AbstractGraph(BaseGraph):
         """Abstract Graph Model."""
+
         class Meta:
             abstract = True
 
@@ -113,6 +117,7 @@ def base_edge(config: GraphConfig):
 
     class AbstractEdge(BaseEdge):
         """Abstract Edge Model."""
+
         graph = config.edge_graph_fk_field(
             to=config.graph_fullname,
             null=True,
@@ -162,11 +167,12 @@ def base_edge(config: GraphConfig):
     return AbstractEdge
 
 
-def base_node(config: GraphConfig):
+def base_node(config: GraphConfig):  # noqa: C901
     """Creates "Abstract Node Model"."""
 
     class AbstractNode(BaseNode):
         """Abstract Node Model."""
+
         def node_class(self):
             return get_model_class(config.node_fullname)
 
@@ -240,7 +246,7 @@ def base_node(config: GraphConfig):
             return _ordered_filter(self.__class__.objects, "pk", pks)
 
         def add_child(self, child: BaseNode, **kwargs):
-            """Provided with a Node instance, attaches that instance as a child to the current Node instance"""
+            """Provided with a Node instance, attaches that instance as a child to the current Node instance."""
             kwargs.update({"parent": self, "child": child})
 
             cls = self.children.through(**kwargs)
@@ -301,34 +307,41 @@ def base_node(config: GraphConfig):
             return False
 
         def remove_children(
-            self, children: models.QuerySet = None, remove_all: bool = False, delete_nodes: bool = False
+            self,
+            children: models.QuerySet = None,
+            remove_all: bool = False,
+            delete_nodes: bool = False,
         ):
             """Removes the edge connecting this node to each child specified.
 
             If no children are specified, removes the edges connecting to all children.
             Optionally deletes the child(ren) node(s) as well.
             """
-            all_successful = True
-
             if children is not None:
-                for child in children.all():
-                    all_successful = all_successful and self.remove_child(child=child, delete_nodes=delete_nodes)
-                if not all_successful:
-                    logger.debug("One or more children could not be removed")
-                    return False
+                return self._remove_specified_children(children, delete_nodes)
             elif remove_all:
-                for child in self.children.all():
-                    all_successful = all_successful and self.remove_child(child=child, delete_nodes=delete_nodes)
-                if not all_successful:
-                    logger.debug("One or more children could not be removed")
-                    return False
+                return self._remove_all_children(delete_nodes)
             else:
                 logger.warning(
-                    "`Node.remove_children` should receive an argument for `children` or `remove_all`. "
-                    "No action taken."
+                    "`Node.remove_children` should receive an argument for `children` or `remove_all`. No action taken."
                 )
+                return False
 
-            return True
+        def _remove_specified_children(self, children, delete_nodes):
+            """Helper function to remove specified children."""
+            all_successful = all(self.remove_child(child=child, delete_node=delete_nodes) for child in children.all())
+            if not all_successful:
+                logger.debug("One or more children could not be removed")
+            return all_successful
+
+        def _remove_all_children(self, delete_nodes):
+            """Helper function to remove all children."""
+            all_successful = all(
+                self.remove_child(child=child, delete_node=delete_nodes) for child in self.children.all()
+            )
+            if not all_successful:
+                logger.debug("One or more children could not be removed")
+            return all_successful
 
         # Pulled from django-postgresql-dag (may need to be moved)
 
@@ -396,7 +409,6 @@ def base_node(config: GraphConfig):
         @classmethod
         def circular_check(cls, parent: BaseNode, child: BaseNode):
             """Checks that the Node is not linked to an ancestor."""
-
             # Whenever we check for circular links, we also check for self-links (which are a type of circular link)
             cls.self_link_check(parent, child)
 

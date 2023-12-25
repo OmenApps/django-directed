@@ -1,10 +1,7 @@
+"""Abstract models for Django Directed."""
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
-
-from django.core.exceptions import ValidationError
-from django.db.models import Case
-from django.db.models import When
 
 from django_directed.models.abstract_base_graph_models import base_edge
 from django_directed.models.abstract_base_graph_models import base_graph

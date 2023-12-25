@@ -1,2 +1,1 @@
-from django.core.exceptions import ValidationError
-from django.utils.translation import gettext_lazy as _
+"""Validators for the django_directed app."""

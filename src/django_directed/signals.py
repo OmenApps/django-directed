@@ -1,3 +1,4 @@
+"""Signals for django_directed."""
 import django.dispatch
 
 

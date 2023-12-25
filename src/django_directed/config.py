@@ -1,3 +1,4 @@
+"""Configuration objects for the django_directed app."""
 import re
 from typing import Union
 
@@ -10,7 +11,7 @@ from django_directed.models import directed_factory
 
 
 def validate_fullname(fullname: str) -> bool:
-    """Validates model fullnames.
+    r"""Validates model fullnames.
 
     <sphinx-skip>:
     Uses the following regex pattern:
@@ -75,28 +76,28 @@ class GraphConfig(BaseModel):
     edge_parent_fk_field: type[models.ForeignKey] = models.ForeignKey
     edge_child_fk_field: type[models.ForeignKey] = models.ForeignKey
 
-    class Config:
+    class Config:  # noqa: D106
         validate_assignment = True
 
     # Pydantic Validators
 
     @validator("edge_graph_fk_field", pre=True, always=True)
     def edge_graph_fk_field_correct_subclass(self, value):
-        """Validates that edge_graph_fk_field is a subclass of CurrentGraphFKField"""
+        """Validates that edge_graph_fk_field is a subclass of CurrentGraphFKField."""
         if not issubclass(value, CurrentGraphFKField):
             raise ValueError("edge_graph_fk_field must be a subclass of CurrentGraphFKField")
         return value
 
     @validator("edge_parent_fk_field", "edge_child_fk_field", pre=True, always=True)
     def edge_parent_child_fk_fields_correct_subclass(self, value):
-        """Validates that edge_parent_fk_field and edge_child_fk_field are subclasses of ForeignKey"""
+        """Validates that edge_parent_fk_field and edge_child_fk_field are subclasses of ForeignKey."""
         if not issubclass(value, models.ForeignKey):
             raise ValueError("edge_parent_fk_field and edge_child_fk_field must be a subclass of ForeignKey")
         return value
 
     @validator("node_children_m2m_field", pre=True, always=True)
     def node_children_m2m_field_is_m2m_subclass(self, value):
-        """Validates that node_children_m2m_field is a subclass of ManyToManyField"""
+        """Validates that node_children_m2m_field is a subclass of ManyToManyField."""
         if not issubclass(value, models.ManyToManyField):
             raise ValueError("node_children_m2m_field must be a subclass of ManyToManyField")
         return value

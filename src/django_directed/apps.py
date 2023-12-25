@@ -2,5 +2,5 @@
 from django.apps import AppConfig
 
 
-class DjangoDirectedConfig(AppConfig):
+class DjangoDirectedConfig(AppConfig):  # noqa: D101
     name = "django_directed"

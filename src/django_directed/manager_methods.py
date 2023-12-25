@@ -1,3 +1,4 @@
+"""Manager methods for the django_directed app."""
 import logging
 
 
