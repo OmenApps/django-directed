@@ -4,12 +4,11 @@ Learning to use graphs can be challenging because some concepts have multiple eq
 
 To help clarify what is meant throughout this project, we define the following terms and definitions. We make heavy use of familial terms, which can help with mentally visualizing the concepts.
 
-This document does is not intended as a course in general graph theory. A graph in the context of this project is made up of nodes which are connected by edges. Edges typically link two nodes *asymmetrically* in all of the directed graphs within django-directed.
-
+This document does is not intended as a course in general graph theory. A graph in the context of this project is made up of nodes which are connected by edges. Edges typically link two nodes _asymmetrically_ in all of the directed graphs within django-directed.
 
 ## Node
 
-Here, `A` is a *node*. Another equivalent name for *node* that you may sometimes hear is *vertex*. While they are interchangeable, we will use the term *node* (or *nodes* for plural) exclusively within this project for consistency.
+Here, `A` is a _node_. Another equivalent name for _node_ that you may sometimes hear is _vertex_. While they are interchangeable, we will use the term _node_ (or _nodes_ for plural) exclusively within this project for consistency.
 
 ```{mermaid}
 graph TD;
@@ -20,7 +19,7 @@ graph TD;
 
 ## Edge
 
-Here, `e` is an *edge* in the graph between nodes `A` and `B`. Edges connect nodes, and are directed (denoted here with an arrowhead). Edges are also called *lines*, *links*, *arcs*, or *arrows*. For consistency, this project will always use the term *edge* (or *edges* for plural).
+Here, `e` is an _edge_ in the graph between nodes `A` and `B`. Edges connect nodes, and are directed (denoted here with an arrowhead). Edges are also called _lines_, _links_, _arcs_, or _arrows_. For consistency, this project will always use the term _edge_ (or _edges_ for plural).
 
 ```{mermaid}
 graph TD;
@@ -34,7 +33,7 @@ graph TD;
 
 ## Root
 
-Here, Node A is the *root* of the graph. It has an in-degree (number of edges coming 'in') of 0.
+Here, Node A is the _root_ of the graph. It has an in-degree (number of edges coming 'in') of 0.
 
 ```{mermaid}
 graph TD;
@@ -55,7 +54,7 @@ graph TD;
 
 ## Roots
 
-Some types of graphs may have multiple roots. Here, Nodes `A` and `B` are *roots* of the graph. Again, if the in-degree is 0, the node is a root.
+Some types of graphs may have multiple roots. Here, Nodes `A` and `B` are _roots_ of the graph. Again, if the in-degree is 0, the node is a root.
 
 ```{mermaid}
 graph TD;
@@ -77,7 +76,7 @@ graph TD;
 
 ## Leaf / Leaves
 
-Here, Nodes `D` and `e` are *leaves* in the graph. They both have an out-degree (number of edges 'out' of the node) of 0.
+Here, Nodes `D` and `e` are _leaves_ in the graph. They both have an out-degree (number of edges 'out' of the node) of 0.
 
 ```{mermaid}
 graph TD;
@@ -101,9 +100,9 @@ graph TD;
 
 ## Orphan
 
-In a given Graph, an *orphan* is a node with no parents nor children. Orphans have an in-degree of 0 *and* and out-degree of 0. Here, node `E` is an orphan. There are no edges connecting it to any other node.
+In a given Graph, an _orphan_ is a node with no parents nor children. Orphans have an in-degree of 0 _and_ and out-degree of 0. Here, node `E` is an orphan. There are no edges connecting it to any other node.
 
-*(Note, there is no equivalent for edges. Every edge connects two [or in special cases, more] nodes.)*
+_(Note, there is no equivalent for edges. Every edge connects two [or in special cases, more] nodes.)_
 
 ```{mermaid}
 graph TD;
@@ -132,11 +131,11 @@ graph TD;
 
 ## Parent / Parents
 
-The *parents* for a given node *x*, if any exist, are those nodes which have a directed edge 'in' to node *x*. In graph theory, this may be refered to as a direct predecessor.
+The _parents_ for a given node _x_, if any exist, are those nodes which have a directed edge 'in' to node _x_. In graph theory, this may be refered to as a direct predecessor.
 
-Here, node `A` is a *parent* of node `B`, and node `B` is a *parent* of node `C`. Depending on the type of graph, nodes may have zero, one, or multiple parents.
+Here, node `A` is a _parent_ of node `B`, and node `B` is a _parent_ of node `C`. Depending on the type of graph, nodes may have zero, one, or multiple parents.
 
-We also refer to *parent edges*, which are the directed edges themselves which point to the node. In this example, edge `e1` is a *parent edge* of node `B`, and edge `e2` is a *parent edge* of node `C`.
+We also refer to _parent edges_, which are the directed edges themselves which point to the node. In this example, edge `e1` is a _parent edge_ of node `B`, and edge `e2` is a _parent edge_ of node `C`.
 
 ```{mermaid}
 graph TD;
@@ -156,11 +155,11 @@ graph TD;
 
 ## Child / Children
 
-The *children* for a given node *x*, if any exist, are those nodes which have a directed edge 'out' from node *x*. In graph theory, this may be refered to as a direct successor.
+The _children_ for a given node _x_, if any exist, are those nodes which have a directed edge 'out' from node _x_. In graph theory, this may be refered to as a direct successor.
 
-Here, node `B` is a *child* of node `A`, and node `C` is a *child* of node `B`. Depending on the type of graph, nodes may have zero, one, or multiple children.
+Here, node `B` is a _child_ of node `A`, and node `C` is a _child_ of node `B`. Depending on the type of graph, nodes may have zero, one, or multiple children.
 
-We also refer to *children edges*, which are the directed edges themselves which point from the node. In this example, edge `e1` is a *child edge* of node `A`, and edge `e2` is a *child edge* of node `B`.
+We also refer to _children edges_, which are the directed edges themselves which point from the node. In this example, edge `e1` is a _child edge_ of node `A`, and edge `e2` is a _child edge_ of node `B`.
 
 ```{mermaid}
 graph TD;
@@ -182,7 +181,7 @@ graph TD;
 
 All nodes in connected paths in a rootward direction. In graph theory, this may be refered to as predecessors.
 
-In this example, the *ancestors* for node `I` are nodes `A`, `C`, `E`, and `F`.
+In this example, the _ancestors_ for node `I` are nodes `A`, `C`, `E`, and `F`.
 
 ```{mermaid}
 graph TD;
@@ -231,7 +230,7 @@ graph TD;
 
 All nodes in connected paths in a leafward direction. In graph theory, this may be refered to as successors.
 
-In this example, the *descendants* for node `C` are nodes `D`, `F`, `G`, `H`, and `I`.
+In this example, the _descendants_ for node `C` are nodes `D`, `F`, `G`, `H`, and `I`.
 
 ```{mermaid}
 graph TD;
@@ -281,7 +280,7 @@ graph TD;
 
 The clan of a node includes all ancestor nodes, the node itself, and all descendant nodes. In graph theory, this can be refered to as the maximal paths through a given node.
 
-In this example, the *clan* for node `F` includes nodes `A`, `C`, `E`, `H`, and `I`.
+In this example, the _clan_ for node `F` includes nodes `A`, `C`, `E`, `H`, and `I`.
 
 ```{mermaid}
 graph TD;
@@ -331,7 +330,7 @@ graph TD;
 
 All nodes that share a parent with this node, excluding the node itself.
 
-In this example, the *siblings* of node `C` are nodes `B`, and `E`, because they all have node `A` in common as a parent.
+In this example, the _siblings_ of node `C` are nodes `B`, and `E`, because they all have node `A` in common as a parent.
 
 ```{mermaid}
 graph TD;
@@ -375,7 +374,7 @@ graph TD;
 
 All nodes that share a child with this node, excluding the node itself.
 
-In this example, the *partners* of node `C` are nodes `B`, and `E`, because nodes `B` and `C` share node `D` as a child, and nodes `C` and `E` share node `F` as a child.
+In this example, the _partners_ of node `C` are nodes `B`, and `E`, because nodes `B` and `C` share node `D` as a child, and nodes `C` and `E` share node `F` as a child.
 
 ```{mermaid}
 graph TD;
@@ -418,9 +417,9 @@ graph TD;
 
 ## Distance
 
-The shortest number of hops from one node to a target node. The *distance* between node `C` and node `H` is 2. This is because the path from `C` to `F` to `H` involves 2 edges.
+The shortest number of hops from one node to a target node. The _distance_ between node `C` and node `H` is 2. This is because the path from `C` to `F` to `H` involves 2 edges.
 
-There is another path from `C` to `H` through nodes `D` and `G`, but that path is longer (3 edges), and when we refer to *distance* in this project, we always mean the smallest number of hops.
+There is another path from `C` to `H` through nodes `D` and `G`, but that path is longer (3 edges), and when we refer to _distance_ in this project, we always mean the smallest number of hops.
 
 ```{mermaid}
 graph TD;
@@ -463,8 +462,7 @@ graph TD;
 
 The distance of the node from furthest root in the graph. Because this can be a bit challenging to visualize, a few examples are provided below.
 
-Because node `A` is the highest (and only) root in the following graph, its *node depth* is 0.
-
+Because node `A` is the highest (and only) root in the following graph, its _node depth_ is 0.
 
 ```{mermaid}
 graph TD;
@@ -499,7 +497,7 @@ graph TD;
     linkStyle default fill:none,stroke:gray
 ```
 
-Using the same graph as before, consider the depth of node `H`. There is only a single root (node `A`) in this graph, and the distance between node `A` and node `H` is 3. So the *node depth* of node `H` is 3.
+Using the same graph as before, consider the depth of node `H`. There is only a single root (node `A`) in this graph, and the distance between node `A` and node `H` is 3. So the _node depth_ of node `H` is 3.
 
 ```{mermaid}
 graph TD;
@@ -540,9 +538,9 @@ graph TD;
     linkStyle 9 stroke-width:3px,fill:none,stroke:green;
 ```
 
-Finally, we will look at a more complicated example with multiple roots at different levels. Here we want the *node depth* of node `F`.
+Finally, we will look at a more complicated example with multiple roots at different levels. Here we want the _node depth_ of node `F`.
 
-While both nodes `A` and `D` are roots in this graph (they have in-degree of 0), node `A` has a greater distance from node `F`, so we determine the depth of node `F` from the viewpoint of node `A`. It takes 3 hops to reach node `F` from node `A`, so the *node depth* of node `F` is 3.
+While both nodes `A` and `D` are roots in this graph (they have in-degree of 0), node `A` has a greater distance from node `F`, so we determine the depth of node `F` from the viewpoint of node `A`. It takes 3 hops to reach node `F` from node `A`, so the _node depth_ of node `F` is 3.
 
 ```{mermaid}
 graph TD;

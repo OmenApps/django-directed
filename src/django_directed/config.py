@@ -1,15 +1,18 @@
 import re
-from typing import List, Type, Union
+from typing import List
+from typing import Type
+from typing import Union
 
 from django.db import models
-from pydantic import BaseModel, validator
+from pydantic import BaseModel
+from pydantic import validator
 
 from django_directed.fields import CurrentGraphFKField
 from django_directed.models import directed_factory
 
 
 def validate_fullname(fullname: str) -> bool:
-    """Validates model fullnames.
+    r"""Validates model fullnames.
 
     <sphinx-skip>:
     Uses the following regex pattern:
@@ -45,7 +48,7 @@ class GraphConfig(BaseModel):
     # Plugins
     #   A list or tuple of pluggy plugins to use with this graph
     # graph_plugins: list = field(default_factory=list)
-    graph_plugins: List = []
+    graph_plugins: list = []
 
     # Maximum number of children allowed for each node in the graph.
     #   A value of `None` means any number of children are allowed.
@@ -66,16 +69,16 @@ class GraphConfig(BaseModel):
 
     # The `children` field in Node defaults to ManyToManyField,
     #   but can optionally use a subclass of ManyToManyField
-    node_children_m2m_field: Type[models.ManyToManyField] = models.ManyToManyField
+    node_children_m2m_field: type[models.ManyToManyField] = models.ManyToManyField
 
     # The `graph` field in Edge defaults to CurrentGraphFKField,
     #   but can optionally use a subclass of CurrentGraphFKField
-    edge_graph_fk_field: Type[CurrentGraphFKField] = CurrentGraphFKField
+    edge_graph_fk_field: type[CurrentGraphFKField] = CurrentGraphFKField
 
     # The `parent`` and `child` fields in Edge default to ForeignKey,
     #   but can optionally use a subclass of ForeignKey
-    edge_parent_fk_field: Type[models.ForeignKey] = models.ForeignKey
-    edge_child_fk_field: Type[models.ForeignKey] = models.ForeignKey
+    edge_parent_fk_field: type[models.ForeignKey] = models.ForeignKey
+    edge_child_fk_field: type[models.ForeignKey] = models.ForeignKey
 
     class Config:
         validate_assignment = True

@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from django_directed.context_managers import get_current_graph_instance
 from django_directed.exceptions import IncorrectInputTypeException
 
+
 logger = logging.getLogger("django_directed")
 
 

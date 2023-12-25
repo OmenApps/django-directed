@@ -68,7 +68,7 @@ The service makes it possible to register the new factory within django-directed
 ```python
 class NewTypeService:
     """Returns the actual Graph, Edge, and Node models"""
-    
+
     def __init__(self, config):
         self._instance = None
         self._config = config
@@ -109,6 +109,6 @@ MyNewTypeNode = new_type.node()
 
 ## Pluggy Plugins
 
-Throughout django-directed, [pluggy](https://pluggy.readthedocs.io/en/stable/) hooks have been added to 
+Throughout django-directed, [pluggy](https://pluggy.readthedocs.io/en/stable/) hooks have been added to
 
 ## Combined approach

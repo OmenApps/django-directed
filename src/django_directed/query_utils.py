@@ -7,16 +7,18 @@ from inspect import ismethod
 from itertools import chain
 
 from django.core.exceptions import FieldDoesNotExist
-from django.db.models import Case, When
-from django.db.models.fields import DateTimeField, UUIDField
-from django.db.models.fields.files import FileField, ImageField
+from django.db.models import Case
+from django.db.models import When
+from django.db.models.fields import DateTimeField
+from django.db.models.fields import UUIDField
+from django.db.models.fields.files import FileField
+from django.db.models.fields.files import ImageField
 from django.db.models.fields.related import ManyToManyField
 
-from django_directed.exceptions import (
-    GraphModelsCannotBeParsedException,
-    IncorrectInputTypeException,
-    IncorrectQuerySetTypeException,
-)
+from django_directed.exceptions import GraphModelsCannotBeParsedException
+from django_directed.exceptions import IncorrectInputTypeException
+from django_directed.exceptions import IncorrectQuerySetTypeException
+
 
 logger = logging.getLogger("django_directed")
 
@@ -173,7 +175,6 @@ def nodes_from_edges_queryset(edges_queryset):
     _NodeModel, _EdgeModel, queryset_type = get_queryset_characteristics(edges_queryset)
 
     if queryset_type == "edges_queryset":
-
         nodes_list = (
             _ordered_filter(
                 _NodeModel.objects,
