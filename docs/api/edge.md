@@ -14,7 +14,6 @@ None
 
 ### Methods returning a QuerySet of Edges
 
-
 ```{py:function} ancestor_edges(target_node)
 
 All Edge instances which are ancestors of the target Node.
@@ -23,7 +22,6 @@ All Edge instances which are ancestors of the target Node.
 :return: Ancestor Edges
 :rtype: QuerySet
 ```
-
 
 ```{py:function} descendant_edges(target_node)
 
@@ -34,7 +32,6 @@ All Edge instances descended from the target Node.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} clan_edges(target_node)
 
 All Edge instances which are ancestors, self, and descendants of the target Node.
@@ -43,7 +40,6 @@ All Edge instances which are ancestors, self, and descendants of the target Node
 :return: Clan Edges
 :rtype: QuerySet
 ```
-
 
 ```{py:function} shortest_path_edges(node_from, node_to)
 
@@ -55,7 +51,6 @@ All Edge instances for the shortest path from node_from to node_to.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} all_path_edges(node_from, node_to)
 
 All Edge instances for all paths from node_from to node_to.
@@ -66,9 +61,7 @@ All Edge instances for all paths from node_from to node_to.
 :rtype: QuerySet
 ```
 
-
 ### Methods returning a Boolean
-
 
 ```{py:function} path_is_valid()
 
@@ -77,9 +70,7 @@ Verify that the current QuerySet of Edges result in a contiguous path.
 :rtype: bool
 ```
 
-
 ### Methods returning other values
-
 
 ```{py:function} from_node_queryset(nodes)
 
@@ -90,7 +81,6 @@ Returns all Edge instances where a parent and child Node are within the provided
 :rtype: QuerySet
 ```
 
-
 ```{py:function} sorted()
 
 Sorts the current Edge QuerySet in a rootward direction
@@ -99,11 +89,9 @@ Sorts the current Edge QuerySet in a rootward direction
 :rtype: QuerySet
 ```
 
-
 ## Model Methods
 
 ### Methods used for building/manipulating an instance
-
 
 ```{py:function} add_edge(from_node, to_node)
 
@@ -114,7 +102,6 @@ Adds an edge between two Node instances.
 :return: Newly created Edge
 :rtype: Edge
 ```
-
 
 ```{py:function} insert_node(node, clone_to_rootside=False, clone_to_leafside=False, pre_save=None, post_save=None)
 
@@ -159,7 +146,6 @@ A more complete example, where we have models named DAGEdge & DAGNode, and we wa
         |                 /
     n3  o           n3  o
 
-
 ```python
 from myapp.models import DAGEdge, DAGNode
 
@@ -179,8 +165,6 @@ def pre_save(new_edge):
 
 DAGEdge.objects.insert_node(e1, n2, clone_to_rootside=True, pre_save=pre_save)
 ```
-
-
 
 ### Methods returning a QuerySet of Nodes
 

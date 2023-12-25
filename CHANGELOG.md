@@ -1,16 +1,18 @@
-# History
+# Changelog
 
+All notable changes to this project will be documented in this file.
 
-## 0.1.0 (2022-02-08)
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
-* Built initial readme entry to start documenting project goals.
+## [Unreleased]
 
-## 0.1.1 (2022-02-17)
+## [2023.12.1]
 
-* Continue work on boilerplate to flesh out the foundations of the project.
+Initial release!
 
+### Added
 
-## 0.1.2 (2022-02-21)
+- TBD
 
-* Add terminology documentation.
-
+[unreleased]: https://github.com/jacklinke/django_directed/compare/HEAD...HEAD
+[2023.12.1]: https://github.com/jacklinke/django_directed/releases/tag/2023.12.1
