@@ -1,20 +1,32 @@
+from __future__ import annotations
+
 import logging
+from typing import TYPE_CHECKING
 
 from django.apps import apps
-from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Case, When
+from django.db.models import Case
+from django.db.models import When
 from django.utils.translation import gettext_lazy as _
 
+from django_directed.context_managers import _set_current_graph_instance
+from django_directed.context_managers import get_current_graph_instance
 from django_directed.query_utils import _ordered_filter
-from django_directed.context_managers import _set_current_graph_instance, get_current_graph_instance
-from django_directed.signals import child_removed, child_added
+from django_directed.signals import child_added
+from django_directed.signals import child_removed
+
 
 logger = logging.getLogger("django_directed")
+
+if TYPE_CHECKING:
+    from django_directed.config import GraphConfig
 
 
 class BaseGraph(models.Model):
     """Base Graph Model lets us verify that a given model instance derives from BaseGraph."""
+
     # ToDo: Make this model a context manager for itself
 
     class Meta:
@@ -51,8 +63,9 @@ def get_model_class(model_fullname: str) -> models.Model:
     return model_class
 
 
-def get_graph_aware_queryset(config):
+def get_graph_aware_queryset(config: GraphConfig):
     """Creates a queryset that is aware of the current graph instance."""
+
     class GraphAwareQuerySet(models.QuerySet):
         def bulk_create(self, objs, batch_size=None, ignore_conflicts=False):
             objs = list(objs)
@@ -64,8 +77,9 @@ def get_graph_aware_queryset(config):
     return GraphAwareQuerySet
 
 
-def get_graph_aware_manager(config):
+def get_graph_aware_manager(config: GraphConfig):
     """Creates a manager that is aware of the current graph instance."""
+
     class GraphAwareManager(models.Manager):
         pass
         # def get_queryset(self):
@@ -76,8 +90,9 @@ def get_graph_aware_manager(config):
     return GraphAwareManager
 
 
-def base_graph(config):
+def base_graph(config: GraphConfig):
     """Creates "Abstract Graph Model"."""
+
     class AbstractGraph(BaseGraph):
         class Meta:
             abstract = True
@@ -94,8 +109,9 @@ def base_graph(config):
     return AbstractGraph
 
 
-def base_edge(config):
+def base_edge(config: GraphConfig):
     """Creates "Abstract Edge Model"."""
+
     class AbstractEdge(BaseEdge):
         graph = config.edge_graph_fk_field(
             to=config.graph_fullname,
@@ -146,8 +162,9 @@ def base_edge(config):
     return AbstractEdge
 
 
-def base_node(config):
+def base_node(config: GraphConfig):
     """Creates "Abstract Node Model"."""
+
     class AbstractNode(BaseNode):
         def node_class(self):
             return get_model_class(config.node_fullname)
@@ -217,7 +234,7 @@ def base_node(config):
             else:
                 return "integer"
 
-        def ordered_queryset_from_pks(self, pks):
+        def ordered_queryset_from_pks(self, pks: list):
             """Generates a queryset, based on the current class and ordered by the provided pks."""
             return _ordered_filter(self.__class__.objects, "pk", pks)
 
@@ -315,7 +332,6 @@ def base_node(config):
         # Pulled from django-postgresql-dag (may need to be moved)
 
         def raw_queryset(self):
-
             QUERY = """
             WITH RECURSIVE traverse({pk_name}, depth) AS (
                 SELECT first.child_id, 1
@@ -371,13 +387,13 @@ def base_node(config):
         # Checks
 
         @staticmethod
-        def self_link_check(parent, child):
+        def self_link_check(parent: BaseNode, child: BaseNode):
             """Checks that the Node is not linked to itself"""
             if parent == child:
                 raise ValidationError("The object cannot be linked to itself")
 
         @classmethod
-        def circular_check(cls, parent, child):
+        def circular_check(cls, parent: BaseNode, child: BaseNode):
             """Checks that the Node is not linked to an ancestor"""
 
             # Whenever we check for circular links, we also check for self-links (which are a type of circular link)
@@ -387,13 +403,13 @@ def base_node(config):
                 raise ValidationError("The new child Node is already an ancestor")
 
         @staticmethod
-        def duplicate_edge_check(parent, child):
+        def duplicate_edge_check(parent: BaseNode, child: BaseNode):
             """Checks that the Node is not linked in duplicate to another Node"""
             if child in parent.self_and_descendants():
                 raise ValidationError("The new Edge is a duplicate")
 
         @staticmethod
-        def children_quantity_check(parent):
+        def children_quantity_check(parent: BaseNode):
             """Checks that the Node has no more than the allowed number of children, if specified"""
             children_quantity_max = (
                 config.children_quantity_max

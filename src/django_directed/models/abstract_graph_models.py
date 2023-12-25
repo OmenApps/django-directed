@@ -1,10 +1,21 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from django.core.exceptions import ValidationError
-from django.db.models import Case, When
+from django.db.models import Case
+from django.db.models import When
 
-from django_directed.models.abstract_base_graph_models import base_edge, base_graph, base_node
+from django_directed.models.abstract_base_graph_models import base_edge
+from django_directed.models.abstract_base_graph_models import base_graph
+from django_directed.models.abstract_base_graph_models import base_node
 
 
-def cyclic_graph_factory(config):
+if TYPE_CHECKING:
+    from django_directed.config import GraphConfig
+
+
+def cyclic_graph_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Graph base model are implemented.
@@ -17,7 +28,7 @@ def cyclic_graph_factory(config):
     return CyclicGraph
 
 
-def cyclic_edge_factory(config):
+def cyclic_edge_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Edge base model are implemented.
@@ -38,7 +49,7 @@ def cyclic_edge_factory(config):
     return CyclicEdge
 
 
-def cyclic_node_factory(config):
+def cyclic_node_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Node base model are implemented.
@@ -51,7 +62,7 @@ def cyclic_node_factory(config):
     return CyclicNode
 
 
-def dag_graph_factory(config):
+def dag_graph_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Graph base model are implemented.
@@ -64,7 +75,7 @@ def dag_graph_factory(config):
     return DAGGraph
 
 
-def dag_edge_factory(config):
+def dag_edge_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Edge base model are implemented.
@@ -83,7 +94,7 @@ def dag_edge_factory(config):
     return DAGEdge
 
 
-def dag_node_factory(config):
+def dag_node_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Node base model are implemented.
@@ -96,7 +107,7 @@ def dag_node_factory(config):
     return DAGNode
 
 
-def polytree_graph_factory(config):
+def polytree_graph_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Graph base model are implemented.
@@ -109,7 +120,7 @@ def polytree_graph_factory(config):
     return PolytreeGraph
 
 
-def polytree_edge_factory(config):
+def polytree_edge_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Edge base model are implemented.
@@ -128,7 +139,7 @@ def polytree_edge_factory(config):
     return PolytreeEdge
 
 
-def polytree_node_factory(config):
+def polytree_node_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Node base model are implemented.
@@ -141,7 +152,7 @@ def polytree_node_factory(config):
     return PolytreeNode
 
 
-def arborescence_graph_factory(config):
+def arborescence_graph_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Graph base model are implemented.
@@ -154,7 +165,7 @@ def arborescence_graph_factory(config):
     return ArborescenceGraph
 
 
-def arborescence_edge_factory(config):
+def arborescence_edge_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Edge base model are implemented.
@@ -173,7 +184,7 @@ def arborescence_edge_factory(config):
     return ArborescenceEdge
 
 
-def arborescence_node_factory(config):
+def arborescence_node_factory(config: GraphConfig):
     """
     Type: Subclassed Abstract Model
     Abstract methods of the Node base model are implemented.
