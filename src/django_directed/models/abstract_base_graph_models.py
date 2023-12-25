@@ -6,18 +6,37 @@ from django.db import models
 from django.db.models import Case, When
 from django.utils.translation import gettext_lazy as _
 
-from django_directed.context_managers import get_current_graph_instance
-from django_directed.models.abstract_base_models import BaseEdge, BaseGraph, BaseNode
 from django_directed.query_utils import _ordered_filter
+from django_directed.context_managers import _set_current_graph_instance, get_current_graph_instance
+from django_directed.signals import child_removed, child_added
 
 logger = logging.getLogger("django_directed")
 
 
+class BaseGraph(models.Model):
+    """Base Graph Model lets us verify that a given model instance derives from BaseGraph."""
+    # ToDo: Make this model a context manager for itself
+
+    class Meta:
+        abstract = True
+
+
+class BaseEdge(models.Model):
+    """Base Edge Model lets us verify that a given model instance derives from BaseEdge."""
+
+    class Meta:
+        abstract = True
+
+
+class BaseNode(models.Model):
+    """Base Node Model lets us verify that a given model instance derives from BaseNode."""
+
+    class Meta:
+        abstract = True
+
+
 def get_model_class(model_fullname: str) -> models.Model:
-    """
-    Provided with a model fullname (`app_name.ModelName`), Returns
-        the associated model class
-    """
+    """Provided with a model fullname (`app_name.ModelName`), returns the associated model class."""
     split_names = model_fullname.split(".")
     if not len(split_names) == 2:
         raise ImproperlyConfigured("Model fullnames in graph config must be specified as 'app_name.ModeName'")
@@ -33,6 +52,7 @@ def get_model_class(model_fullname: str) -> models.Model:
 
 
 def get_graph_aware_queryset(config):
+    """Creates a queryset that is aware of the current graph instance."""
     class GraphAwareQuerySet(models.QuerySet):
         def bulk_create(self, objs, batch_size=None, ignore_conflicts=False):
             objs = list(objs)
@@ -45,6 +65,7 @@ def get_graph_aware_queryset(config):
 
 
 def get_graph_aware_manager(config):
+    """Creates a manager that is aware of the current graph instance."""
     class GraphAwareManager(models.Manager):
         pass
         # def get_queryset(self):
@@ -56,11 +77,8 @@ def get_graph_aware_manager(config):
 
 
 def base_graph(config):
+    """Creates "Abstract Graph Model"."""
     class AbstractGraph(BaseGraph):
-        """
-        Creates "Abstract Graph Model"
-        """
-
         class Meta:
             abstract = True
 
@@ -77,11 +95,8 @@ def base_graph(config):
 
 
 def base_edge(config):
+    """Creates "Abstract Edge Model"."""
     class AbstractEdge(BaseEdge):
-        """
-        Creates "Abstract Edge Model"
-        """
-
         graph = config.edge_graph_fk_field(
             to=config.graph_fullname,
             null=True,
@@ -132,11 +147,8 @@ def base_edge(config):
 
 
 def base_node(config):
+    """Creates "Abstract Node Model"."""
     class AbstractNode(BaseNode):
-        """
-        Creates "Abstract Node Model"
-        """
-
         def node_class(self):
             return get_model_class(config.node_fullname)
 
@@ -169,9 +181,9 @@ def base_node(config):
         )
 
         def get_foreign_key_field(self, fk_instance=None):
-            """
-            Provided a model instance, checks if the edge model has a ForeignKey field to the
-            model class of that instance, and then returns the associated field name, else None.
+            """Provided a model instance, checks if the edge model has a ForeignKey field to the model class of that instance.
+
+            Returns the associated field name, else None.
             """
             if fk_instance is not None:
                 edge_model = self.edge_class()
@@ -182,18 +194,19 @@ def base_node(config):
             return None
 
         def get_pk_name(self):
-            """
-            Sometimes we set a field other than 'pk' for the primary key.
-            This method is used to get the correct primary key field name for the
-            model so that raw queries return the correct information.
+            """This method is used to get the correct primary key field name.
+
+            Sometimes we set a field other than 'pk' for the primary key, so we need to be able to get the
+            correct field name so that raw queries return the correct information.
             """
             return self._meta.pk.name
 
         def get_pk_type(self):
-            """
-            The pkid class may be set to a non-default type per-model or across the project.
-            This method is used to return the postgres type name for the primary key field so
-            that raw queries return the correct information.
+            """This method is used to return the postgres type name for the primary key field.
+
+            This allows raw queries return the correct information, since the pkid class may be set to a
+            non-default type per-model or across the project.
+
             """
             django_pk_type = type(self._meta.pk).__name__
 
@@ -205,9 +218,7 @@ def base_node(config):
                 return "integer"
 
         def ordered_queryset_from_pks(self, pks):
-            """
-            Generates a queryset, based on the current class and ordered by the provided pks
-            """
+            """Generates a queryset, based on the current class and ordered by the provided pks."""
             return _ordered_filter(self.__class__.objects, "pk", pks)
 
         def add_child(self, child: BaseNode, **kwargs):
@@ -216,13 +227,16 @@ def base_node(config):
 
             cls = self.children.through(**kwargs)
             cls.save()
+            child_added.send(
+                sender=self.__class__,
+                child_id=child.pk,
+                parent_id=self.pk,
+                graph_fullname=config.graph_fullname,
+            )
             return cls
 
         def add_children(self, children: models.QuerySet, **kwargs) -> list:
-            """
-            Provided with a QuerySet of Node instances, attaches those
-              instances as children of the current Node instance
-            """
+            """Provided with a QuerySet of Node instances, attaches those instances as children of the current Node instance."""
             edge_list = []
             for child in children:
                 if child is not None:
@@ -231,17 +245,11 @@ def base_node(config):
             return edge_list
 
         def add_parent(self, parent: BaseNode, **kwargs):
-            """
-            Provided with a Node instance, attaches that instance
-              as a parent to the current Node instance
-            """
+            """Provided with a Node instance, attaches that instance as a parent to the current Node instance."""
             return parent.add_child(child=self, **kwargs)
 
         def add_parents(self, parents: models.QuerySet, **kwargs) -> list:
-            """
-            Provided with a QuerySet of Node instances, attaches those
-              instances as parents of the current Node instance
-            """
+            """Provided with a QuerySet of Node instances, attaches those instances as parents of the current Node instance."""
             edge_list = []
             for parent in parents:
                 edge_list.append(parent.add_child(child=self, **kwargs))
@@ -249,9 +257,9 @@ def base_node(config):
             return edge_list
 
         def remove_child(self, child: BaseNode = None, delete_node: bool = False):
-            """
-            Removes the edge connecting this node to the child Node specified.
-              Optionally deletes the child node as well.
+            """Removes the edge connecting this node to the child Node specified.
+
+            Optionally deletes the child node as well.
             """
             if child is not None and child in self.children.all():
                 self.children.through.objects.filter(parent=self, child=child).delete()
@@ -260,7 +268,14 @@ def base_node(config):
                     # https://docs.djangoproject.com/en/dev/ref/models/instances/#deleting-objects
                     # This only deletes the object in the database; the Python instance will still
                     # exist and will still have data in its fields.
+                    child_id = child.pk
                     child.delete()
+                    child_removed.send(
+                        sender=self.__class__,
+                        child_id=child_id,
+                        parent_id=self.pk,
+                        graph_fullname=config.graph_fullname,
+                    )
                 return True
             logger.debug(
                 "Argument `child` in `Node.remove_child()` was not provided or was not a child of the current Node."
@@ -270,9 +285,10 @@ def base_node(config):
         def remove_children(
             self, children: models.QuerySet = None, remove_all: bool = False, delete_nodes: bool = False
         ):
-            """
-            Removes the edge connecting this node to each child specified, otherwise removes
-            the edges connecting to all children. Optionally deletes the child(ren) node(s) as well.
+            """Removes the edge connecting this node to each child specified.
+
+            If no children are specified, removes the edges connecting to all children.
+            Optionally deletes the child(ren) node(s) as well.
             """
             all_successful = True
 

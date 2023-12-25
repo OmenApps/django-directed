@@ -1,0 +1,18 @@
+{
+  "_output_dir": "/home/watervize/github_jacklinke",
+  "_template": "gh:OmenApps/cookiecutter-django-package",
+  "author": "Jack Linke",
+  "copyright_year": "2023",
+  "development_status": "Development Status :: 3 - Alpha",
+  "docker_compose_python_version": "3.11",
+  "email": "jacklinke@gmail.com",
+  "github_owner": "jacklinke",
+  "github_user": "jacklinke",
+  "license": "MIT",
+  "package_description": "Tools for building, querying, manipulating, and exporting directed graphs with django",
+  "package_name": "django_directed",
+  "project_name": "django-directed",
+  "use_playwright": "y",
+  "use_postgres": "y",
+  "version": "2023.12.1"
+}

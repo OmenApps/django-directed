@@ -26,7 +26,7 @@ Here, `e` is an *edge* in the graph between nodes `A` and `B`. Edges connect nod
 graph TD;
     A((A));
     B((B));
-    
+
     A--e-->B;
 
     linkStyle 0 stroke-width:3px,fill:none,stroke:green;
@@ -42,14 +42,14 @@ graph TD;
     B((B));
     C((C));
     D((D));
-    
+
     A-->B;
     A-->C;
     B-->D;
     C-->D;
 
     style A fill:green,stroke:#333,stroke-width:4px;
-    
+
     linkStyle default fill:none,stroke:gray
 ```
 
@@ -63,7 +63,7 @@ graph TD;
     B((B));
     C((C));
     D((D));
-    
+
     A-->C;
     B-->C;
     B-->D;
@@ -86,7 +86,7 @@ graph TD;
     C((C));
     D((D));
     E((E));
-    
+
     A-->B;
     A-->C;
     B-->D;
@@ -112,11 +112,18 @@ graph TD;
     C((C));
     D((D));
     E((E));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
+
+    %% 0
+    A-->B;
+
+    %% 1
+    A-->C;
+
+    %% 2
+    B-->D;
+
+    %% 3
+    C-->D;
 
     style E fill:green,stroke:#333,stroke-width:4px;
 
@@ -136,7 +143,7 @@ graph TD;
     A((A));
     B((B));
     C((C));
-    
+
     A--e1-->B;
     B--e2-->C;
 
@@ -160,7 +167,7 @@ graph TD;
     A((A));
     B((B));
     C((C));
-    
+
     A--e1-->B;
     B--e2-->C;
 
@@ -190,20 +197,21 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style I fill:green,stroke:#333,stroke-width:4px;
     style A fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -238,20 +246,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style C fill:green,stroke:#333,stroke-width:4px;
     style D fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -288,20 +296,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style F fill:green,stroke:#333,stroke-width:4px;
     style A fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -338,20 +346,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style C fill:green,stroke:#333,stroke-width:4px;
     style B fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -382,20 +390,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style C fill:green,stroke:#333,stroke-width:4px;
     style B fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -427,20 +435,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C--1-->D; %% 3
-    A-->E; %% 4
-    C--1-->F; %% 5
-    E-->F; %% 6
-    D--2-->G; %% 7
-    G--3-->H; %% 8
-    F--2-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C--1-->D;
+    A-->E;
+    C--1-->F;
+    E-->F;
+    D--2-->G;
+    G--3-->H;
+    F--2-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style C fill:green,stroke:#333,stroke-width:4px;
     style F fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -471,20 +479,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style A fill:green,stroke:#333,stroke-width:4px;
 
@@ -506,20 +514,20 @@ graph TD;
     I((I));
     J((J));
     K((K));
-    
-    A-->B; %% 0
-    A--1-->C; %% 1
-    B-->D; %% 2
-    C-->D; %% 3
-    A-->E; %% 4
-    C--2-->F; %% 5
-    E-->F; %% 6
-    D-->G; %% 7
-    G-->H; %% 8
-    F--3-->H; %% 9
-    F-->I; %% 10
-    E-->J; %% 11
-    J-->K; %% 12
+
+    A-->B;
+    A--1-->C;
+    B-->D;
+    C-->D;
+    A-->E;
+    C--2-->F;
+    E-->F;
+    D-->G;
+    G-->H;
+    F--3-->H;
+    F-->I;
+    E-->J;
+    J-->K;
 
     style A fill:green,stroke:#333,stroke-width:4px;
     style C fill:#f86f06,stroke:#333,stroke-width:4px;
@@ -544,12 +552,12 @@ graph TD;
     D((D));
     E((E));
     F((F));
-    
-    A--1-->B; %% 0
-    B--2-->C; %% 1
-    D-->E; %% 2
-    E-->F; %% 3
-    C--3-->F; %% 4
+
+    A--1-->B;
+    B--2-->C;
+    D-->E;
+    E-->F;
+    C--3-->F;
 
     style A fill:green,stroke:#333,stroke-width:4px;
     style B fill:#f86f06,stroke:#333,stroke-width:4px;

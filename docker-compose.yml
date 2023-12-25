@@ -1,0 +1,33 @@
+version: "3"
+
+volumes:
+  local_postgres_data:
+
+services:
+  django_test:
+    build:
+      context: .
+      dockerfile: ./compose/django/Dockerfile
+    image: django_directed_django
+    container_name: django_test
+    depends_on:
+      - postgres_test
+    env_file:
+      - ./compose/django/.django
+    ports:
+      - "8111:8111"
+    command: /start
+
+  postgres_test:
+    image: postgres:16
+    container_name: postgres_test
+    volumes:
+      - local_postgres_data:/var/lib/postgresql/data
+    environment:
+      - ENGINE=django.db.backends.postgresql_psycopg2
+      - POSTGRES_PASSWORD=postgres
+      - NAME=postgres
+      - USER=postgres
+      - PASSWORD=postgres
+      - HOST=postgres
+      - PORT=5432

@@ -9,13 +9,16 @@ from django_directed.models import directed_factory
 
 
 def validate_fullname(fullname: str) -> bool:
-    """
-    Validates model fullnames using the following regex pattern:
-        ^([a-z])                                                Starts with 1 [a-z]
-                ([a-zA-Z0-9_]+)                                 Match 1 or more [a-zA-Z0-9_]
-                            (\.)                                Match 1 period
-                                ([a-zA-Z])                      Match 1 [a-zA-Z]
-                                            ([a-zA-Z0-9_]+)$    Match 1 or more [a-zA-Z0-9_] at end
+    """Validates model fullnames.
+
+    <sphinx-skip>:
+    Uses the following regex pattern:
+        ^([a-z])                                                    Starts with 1 [a-z]
+                ([a-zA-Z0-9_]+)                                     Match 1 or more [a-zA-Z0-9_]
+                                (\.)                                Match 1 period
+                                    ([a-zA-Z])                      Match 1 [a-zA-Z]
+                                                ([a-zA-Z0-9_]+)$    Match 1 or more [a-zA-Z0-9_] at end
+    <sphinx-skip>
     """
     pattern = re.compile(r"^([a-z])([a-zA-Z0-9_]+)(\.)([a-zA-Z])([a-zA-Z0-9_]+)$")
     if not bool(re.match(pattern, fullname)):
