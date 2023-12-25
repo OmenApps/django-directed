@@ -1,6 +1,4 @@
 import re
-from typing import List
-from typing import Type
 from typing import Union
 
 from django.db import models
@@ -12,7 +10,7 @@ from django_directed.models import directed_factory
 
 
 def validate_fullname(fullname: str) -> bool:
-    r"""Validates model fullnames.
+    """Validates model fullnames.
 
     <sphinx-skip>:
     Uses the following regex pattern:
@@ -30,10 +28,7 @@ def validate_fullname(fullname: str) -> bool:
 
 
 class GraphConfig(BaseModel):
-    """
-    A GraphConfig object is used to configure details about the
-      directed graph components.
-    """
+    """A GraphConfig object is used to configure details about the directed graph components."""
 
     # Graph Type
     #   Default types include 'CYCLIC', 'DAG', 'POLYTREE', 'ARBORESCENCE'
@@ -86,19 +81,22 @@ class GraphConfig(BaseModel):
     # Pydantic Validators
 
     @validator("edge_graph_fk_field", pre=True, always=True)
-    def edge_graph_fk_field_correct_subclass(cls, value):
+    def edge_graph_fk_field_correct_subclass(self, value):
+        """Validates that edge_graph_fk_field is a subclass of CurrentGraphFKField"""
         if not issubclass(value, CurrentGraphFKField):
             raise ValueError("edge_graph_fk_field must be a subclass of CurrentGraphFKField")
         return value
 
     @validator("edge_parent_fk_field", "edge_child_fk_field", pre=True, always=True)
-    def edge_parent_child_fk_fields_correct_subclass(cls, value):
+    def edge_parent_child_fk_fields_correct_subclass(self, value):
+        """Validates that edge_parent_fk_field and edge_child_fk_field are subclasses of ForeignKey"""
         if not issubclass(value, models.ForeignKey):
             raise ValueError("edge_parent_fk_field and edge_child_fk_field must be a subclass of ForeignKey")
         return value
 
     @validator("node_children_m2m_field", pre=True, always=True)
-    def node_children_m2m_field_is_m2m_subclass(cls, value):
+    def node_children_m2m_field_is_m2m_subclass(self, value):
+        """Validates that node_children_m2m_field is a subclass of ManyToManyField"""
         if not issubclass(value, models.ManyToManyField):
             raise ValueError("node_children_m2m_field must be a subclass of ManyToManyField")
         return value

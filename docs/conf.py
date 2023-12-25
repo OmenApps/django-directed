@@ -25,7 +25,6 @@ django.setup()
 
 
 def setup(app):
-    # Register a sphinx.ext.autodoc.between listener to ignore everything
-    # between lines that contain the word IGNORE
+    """Register a sphinx.ext.autodoc.between listener to ignore everything between lines that contain `<sphinx-skip>`."""
     app.connect("autodoc-process-docstring", between("^.*<sphinx-skip>.*$", exclude=True))
     return app

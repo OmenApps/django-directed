@@ -16,10 +16,7 @@ if TYPE_CHECKING:
 
 
 def cyclic_graph_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Graph base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Graph base model are implemented."""
 
     class CyclicGraph(base_graph(config)):
         class Meta:
@@ -29,10 +26,7 @@ def cyclic_graph_factory(config: GraphConfig):
 
 
 def cyclic_edge_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Edge base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Edge base model are implemented."""
 
     class CyclicEdge(base_edge(config)):
         class Meta:
@@ -50,10 +44,7 @@ def cyclic_edge_factory(config: GraphConfig):
 
 
 def cyclic_node_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Node base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Node base model are implemented."""
 
     class CyclicNode(base_node(config)):
         class Meta:
@@ -63,10 +54,7 @@ def cyclic_node_factory(config: GraphConfig):
 
 
 def dag_graph_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Graph base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Graph base model are implemented."""
 
     class DAGGraph(base_graph(config)):
         class Meta:
@@ -76,10 +64,7 @@ def dag_graph_factory(config: GraphConfig):
 
 
 def dag_edge_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Edge base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Edge base model are implemented."""
 
     class DAGEdge(base_edge(config)):
         class Meta:
@@ -95,10 +80,7 @@ def dag_edge_factory(config: GraphConfig):
 
 
 def dag_node_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Node base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Node base model are implemented."""
 
     class DAGNode(base_node(config)):
         class Meta:
@@ -108,10 +90,7 @@ def dag_node_factory(config: GraphConfig):
 
 
 def polytree_graph_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Graph base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Graph base model are implemented."""
 
     class PolytreeGraph(base_graph(config)):
         class Meta:
@@ -121,10 +100,7 @@ def polytree_graph_factory(config: GraphConfig):
 
 
 def polytree_edge_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Edge base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Edge base model are implemented."""
 
     class PolytreeEdge(base_edge(config)):
         class Meta:
@@ -140,10 +116,7 @@ def polytree_edge_factory(config: GraphConfig):
 
 
 def polytree_node_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Node base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Node base model are implemented."""
 
     class PolytreeNode(base_node(config)):
         class Meta:
@@ -153,10 +126,7 @@ def polytree_node_factory(config: GraphConfig):
 
 
 def arborescence_graph_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Graph base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Graph base model are implemented."""
 
     class ArborescenceGraph(base_graph(config)):
         class Meta:
@@ -166,10 +136,7 @@ def arborescence_graph_factory(config: GraphConfig):
 
 
 def arborescence_edge_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Edge base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Edge base model are implemented."""
 
     class ArborescenceEdge(base_edge(config)):
         class Meta:
@@ -185,10 +152,7 @@ def arborescence_edge_factory(config: GraphConfig):
 
 
 def arborescence_node_factory(config: GraphConfig):
-    """
-    Type: Subclassed Abstract Model
-    Abstract methods of the Node base model are implemented.
-    """
+    """Type: Subclassed Abstract Model. Abstract methods of the Node base model are implemented."""
 
     class ArborescenceNode(base_node(config)):
         class Meta:

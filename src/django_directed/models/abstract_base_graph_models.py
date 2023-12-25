@@ -7,11 +7,7 @@ from django.apps import apps
 from django.core.exceptions import ImproperlyConfigured
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.db.models import Case
-from django.db.models import When
-from django.utils.translation import gettext_lazy as _
 
-from django_directed.context_managers import _set_current_graph_instance
 from django_directed.context_managers import get_current_graph_instance
 from django_directed.query_utils import _ordered_filter
 from django_directed.signals import child_added
@@ -67,6 +63,7 @@ def get_graph_aware_queryset(config: GraphConfig):
     """Creates a queryset that is aware of the current graph instance."""
 
     class GraphAwareQuerySet(models.QuerySet):
+        """A QuerySet that is aware of the current graph instance."""
         def bulk_create(self, objs, batch_size=None, ignore_conflicts=False):
             objs = list(objs)
             for obj in objs:
@@ -81,6 +78,7 @@ def get_graph_aware_manager(config: GraphConfig):
     """Creates a manager that is aware of the current graph instance."""
 
     class GraphAwareManager(models.Manager):
+        """A Manager that is aware of the current graph instance."""
         pass
         # def get_queryset(self):
         #     graph = get_current_graph_instance(graph_fullname=config.graph_fullname)
@@ -94,6 +92,7 @@ def base_graph(config: GraphConfig):
     """Creates "Abstract Graph Model"."""
 
     class AbstractGraph(BaseGraph):
+        """Abstract Graph Model."""
         class Meta:
             abstract = True
 
@@ -113,6 +112,7 @@ def base_edge(config: GraphConfig):
     """Creates "Abstract Edge Model"."""
 
     class AbstractEdge(BaseEdge):
+        """Abstract Edge Model."""
         graph = config.edge_graph_fk_field(
             to=config.graph_fullname,
             null=True,
@@ -166,6 +166,7 @@ def base_node(config: GraphConfig):
     """Creates "Abstract Node Model"."""
 
     class AbstractNode(BaseNode):
+        """Abstract Node Model."""
         def node_class(self):
             return get_model_class(config.node_fullname)
 
@@ -362,25 +363,25 @@ def base_node(config: GraphConfig):
             )
 
         def descendants_raw(self, **kwargs):
-            """Returns a raw QuerySet of all nodes in connected paths in a leafward direction"""
+            """Returns a raw QuerySet of all nodes in connected paths in a leafward direction."""
             return self.raw_queryset()
 
         def descendants(self, **kwargs):
-            """Returns a QuerySet of all nodes in connected paths in a leafward direction"""
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction."""
             pks = [item.pk for item in self.descendants_raw(**kwargs)]
             return self.ordered_queryset_from_pks(pks)
 
         def descendants_count(self):
-            """Returns an integer number representing the total number of descendant nodes"""
+            """Returns an integer number representing the total number of descendant nodes."""
             return self.descendants().count()
 
         def self_and_descendants(self, **kwargs):
-            """Returns a QuerySet of all nodes in connected paths in a leafward direction, prepending with self"""
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction, prepending with self."""
             pks = [self.pk] + [item.pk for item in self.descendants_raw(**kwargs)]
             return self.ordered_queryset_from_pks(pks)
 
         def descendants_and_self(self, **kwargs):
-            """Returns a QuerySet of all nodes in connected paths in a leafward direction, appending with self"""
+            """Returns a QuerySet of all nodes in connected paths in a leafward direction, appending with self."""
             pks = [item.pk for item in self.descendants_raw(**kwargs)] + [self.pk]
             return self.ordered_queryset_from_pks(pks)
 
@@ -388,13 +389,13 @@ def base_node(config: GraphConfig):
 
         @staticmethod
         def self_link_check(parent: BaseNode, child: BaseNode):
-            """Checks that the Node is not linked to itself"""
+            """Checks that the Node is not linked to itself."""
             if parent == child:
                 raise ValidationError("The object cannot be linked to itself")
 
         @classmethod
         def circular_check(cls, parent: BaseNode, child: BaseNode):
-            """Checks that the Node is not linked to an ancestor"""
+            """Checks that the Node is not linked to an ancestor."""
 
             # Whenever we check for circular links, we also check for self-links (which are a type of circular link)
             cls.self_link_check(parent, child)
@@ -404,13 +405,13 @@ def base_node(config: GraphConfig):
 
         @staticmethod
         def duplicate_edge_check(parent: BaseNode, child: BaseNode):
-            """Checks that the Node is not linked in duplicate to another Node"""
+            """Checks that the Node is not linked in duplicate to another Node."""
             if child in parent.self_and_descendants():
                 raise ValidationError("The new Edge is a duplicate")
 
         @staticmethod
         def children_quantity_check(parent: BaseNode):
-            """Checks that the Node has no more than the allowed number of children, if specified"""
+            """Checks that the Node has no more than the allowed number of children, if specified."""
             children_quantity_max = (
                 config.children_quantity_max
                 if config.children_quantity_max and config.children_quantity_max > 0
