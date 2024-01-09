@@ -1,13 +1,23 @@
 # django-directed
 
-![GitHub branch checks state](https://img.shields.io/github/checks-status/jacklinke/django-directed/main)
-![Read the Docs](https://img.shields.io/readthedocs/django-directed)
-![GitHub last commit](https://img.shields.io/github/last-commit/jacklinke/django-directed)
-![PyPI - License](https://img.shields.io/pypi/l/django-directed)
-![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/jacklinke/django-directed)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/django-directed)
-![PyPI - Django Version](https://img.shields.io/pypi/djversions/django-directed)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?logo=postgresql&logoColor=white)
+[![PyPI](https://img.shields.io/pypi/v/django-directed.svg)][pypi status]
+[![Status](https://img.shields.io/pypi/status/django-directed.svg)][pypi status]
+[![Python Version](https://img.shields.io/pypi/pyversions/django-directed)][pypi status]
+[![License](https://img.shields.io/pypi/l/django-directed)][license]
+
+[![Read the documentation at https://django-directed.readthedocs.io/](https://img.shields.io/readthedocs/django-directed/latest.svg?label=Read%20the%20Docs)][read the docs]
+[![Tests](https://github.com/jacklinke/django-directed/actions/workflows/tests.yml/badge.svg)][tests]
+[![Codecov](https://codecov.io/gh/jacklinke/django-directed/branch/main/graph/badge.svg)][codecov]
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
+[![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
+
+[pypi status]: https://pypi.org/project/django-directed/
+[read the docs]: https://django-directed.readthedocs.io/
+[tests]: https://github.com/jacklinke/django-directed/actions?workflow=Tests
+[codecov]: https://app.codecov.io/gh/jacklinke/django-directed
+[pre-commit]: https://github.com/pre-commit/pre-commit
+[black]: https://github.com/psf/black
 
 Tools for building, querying, manipulating, and exporting [directed graphs](https://en.wikipedia.org/wiki/Directed_graph) with django.
 
@@ -28,7 +38,6 @@ Graphs in django-directed are constructed with three models (or potentially more
 - **Node**: A node can belong to more than one Graph. This allows us to represent multi-dimensional or multi-layered graphs.
 
 django-directed includes model factories for building various types of directed graphs. As an example, imagine a project in which you display family trees and also provide a searchable interface for research papers about family trees, where papers can be linked to previous papers that they cite. Both of these concepts can be represented by a [Directed Acyclic Graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph), and within your project you could create a set of DAG models for the family tree app and another set of DAG models for the academic papers app.
-
 
 ## Quickstart
 
@@ -59,7 +68,6 @@ my_config = GraphConfig(
 ```
 
 Create the concrete models from a model factory service. In this example, we are adding some fields as an example of what you might do in your own application.
-
 
 ```python
 from django.db import models
@@ -160,6 +168,8 @@ with graph_scope(another_graph):
 
     c1.add_child(c2)
 ```
+
+<!-- github-only -->
 
 ### Resulting model data
 
@@ -304,9 +314,9 @@ with graph_scope(first_graph):
     print(c1.shortest_path(c2))
 ```
 
-*Output*: `django_directed.models.NodeNotReachableException`
+_Output_: `django_directed.models.NodeNotReachableError`
 
-Next, we will perform the same query on `another_graph`, which *does* have a path from `c1` to `c2` through a single Edge. The value returned is a QuerySet of the Nodes in the path.
+Next, we will perform the same query on `another_graph`, which _does_ have a path from `c1` to `c2` through a single Edge. The value returned is a QuerySet of the Nodes in the path.
 
 ```python
 with graph_scope(another_graph):
@@ -316,7 +326,7 @@ with graph_scope(another_graph):
     print(c1.shortest_path(c2))
 ```
 
-*Output*: `<QuerySet [<NetworkNode: c1>, <NetworkNode: c2>]>`
+_Output_: `<QuerySet [<NetworkNode: c1>, <NetworkNode: c2>]>`
 
 For additional methods of querying, see the API docs for [Graph](https://django-directed.readthedocs.io/en/latest/api/graph.html), [Edge](https://django-directed.readthedocs.io/en/latest/api/edge.html), and [Node](https://django-directed.readthedocs.io/en/latest/api/node.html).
 
@@ -330,7 +340,7 @@ A series of example apps demonstrating vaious aspects and techniques of using dj
 
 - **[Airports](https://github.com/jacklinke/django-directed/tree/main/tests/example/airports)** - An app demonstrating one method of working with multidimensional graphs to model airports with a common set of nodes, and edges for each of the connecting airlines.
 - **[Electrical Grids](https://github.com/jacklinke/django-directed/tree/main/tests/example/electrical_grids)** - Demonstrate graphs of neighborhood electrical connections and meters.
-- **[Family Trees](https://github.com/jacklinke/django-directed/tree/main/tests/example/family_tree)** - Demonstrates building family trees for multiple mythological families.
+- **[Family Trees](https://github.com/jacklinke/django-directed/tree/main/tests/example/family_trees)** - Demonstrates building family trees for multiple mythological families.
 - **[Forums](https://github.com/jacklinke/django-directed/tree/main/tests/example/forums)** - Forums and threaded comments.
 - **[NetworkX Graphs](https://github.com/jacklinke/django-directed/tree/main/tests/example/networkx_graphs)** - Demonstration of using NetworkX alongside django-directed.
 

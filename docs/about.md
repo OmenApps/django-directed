@@ -28,7 +28,7 @@ The scope of this package includes working with a variety of directed graphs. Th
   - [Directed cyclic graph](https://en.wikipedia.org/wiki/Cyclic_graph)
   - [Directed acyclic graph (DAG)](https://en.wikipedia.org/wiki/Directed_acyclic_graph)
     - [Polytree](https://en.wikipedia.org/wiki/Polytree) (aka directed tree, oriented tree, or singly connected network) - DAGs whose underlying undirected graph is a tree
-      - [Arborescence](https://en.wikipedia.org/wiki/Arborescence_(graph_theory)) (or out-tree or rooted tree) (single-rooted polytree)
+      - [Arborescence](<https://en.wikipedia.org/wiki/Arborescence_(graph_theory)>) (or out-tree or rooted tree) (single-rooted polytree)
 
 Other types of graphs to consider supporting (in expected order of complexity):
 
@@ -41,7 +41,7 @@ Other types of graphs to consider supporting (in expected order of complexity):
   - This might be further constrained in a cyclic graph to limit edges between two nodes to no more than two, with one edge in each direction.
 - **[Hypergraph](https://en.wikipedia.org/wiki/Hypergraph)** - Graphs where edges can join more than just two nodes.
 
-For further details on *building, querying, manipulating, and exporting* graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
+For further details on _building, querying, manipulating, and exporting_ graphs, please [Read the Docs](https://django-directed.readthedocs.io/en/latest/)
 
 ## Example Use-Cases of django-directed
 

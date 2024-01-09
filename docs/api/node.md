@@ -46,8 +46,6 @@ None
 
 None
 
-
-
 ## Model Methods
 
 ### Methods used for building/manipulating an instance
@@ -144,7 +142,6 @@ Removes all parents of the current Node instance, optionally deleting self as we
 
 ### Methods returning a QuerySet of Nodes
 
-
 ```{py:function} ancestors()
 
 Returns all Nodes in connected paths in a rootward direction.
@@ -153,7 +150,6 @@ Returns all Nodes in connected paths in a rootward direction.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} self_and_ancestors()
 
 Returns all Nodes in connected paths in a rootward direction, prepending self.
@@ -161,7 +157,6 @@ Returns all Nodes in connected paths in a rootward direction, prepending self.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} ancestors_and_self()
 
@@ -179,7 +174,6 @@ Returns all Nodes in connected paths in a leafward direction.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} self_and_descendants()
 
 Returns all Nodes in connected paths in a leafward direction, prepending self.
@@ -187,7 +181,6 @@ Returns all Nodes in connected paths in a leafward direction, prepending self.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} descendants_and_self()
 
@@ -205,7 +198,6 @@ Returns all Nodes that share a parent with this Node.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} self_and_siblings()
 
 Returns all Nodes that share a parent with this Node, prepending self.
@@ -213,7 +205,6 @@ Returns all Nodes that share a parent with this Node, prepending self.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} siblings_and_self()
 
@@ -231,7 +222,6 @@ Returns all Nodes that share a child with this Node.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} self_and_partners()
 
 Returns all Nodes that share a child with this Node, prepending self.
@@ -239,7 +229,6 @@ Returns all Nodes that share a child with this Node, prepending self.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} partners_and_self()
 
@@ -249,7 +238,6 @@ Returns all Nodes that share a child with this Node, appending self.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} clan()
 
 Returns a QuerySet with all ancestor Nodes, self, and all descendant Nodes.
@@ -257,7 +245,6 @@ Returns a QuerySet with all ancestor Nodes, self, and all descendant Nodes.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} connected_graph()
 
@@ -267,7 +254,6 @@ Returns all nodes connected in any way to the current Node instance.
 :return: Nodes
 :rtype: QuerySet
 ```
-
 
 ```{py:function} shortest_path(target_node)
 
@@ -279,7 +265,6 @@ Returns the shortest path from self to target Node. Resulting Queryset is sorted
 :rtype: QuerySet
 ```
 
-
 ```{py:function} all_paths(target_node)
 
 Returns all paths from self to target Node. Resulting Queryset is sorted leafward, regardless of the relative position of starting and ending nodes.
@@ -290,8 +275,8 @@ Returns all paths from self to target Node. Resulting Queryset is sorted leafwar
 :rtype: QuerySet
 ```
 
-
 ```{py:function} roots()
+:noindex:
 
 Returns a QuerySet of all root Nodes, if any, for the current Node.
 
@@ -300,13 +285,13 @@ Returns a QuerySet of all root Nodes, if any, for the current Node.
 ```
 
 ```{py:function} leaves()
+:noindex:
 
 Returns a QuerySet of all leaf Nodes, if any, for the current Node.
 
 :return: Leaf Nodes
 :rtype: QuerySet
 ```
-
 
 For future consideration:
 
@@ -317,8 +302,8 @@ For future consideration:
 
 ### Methods returning a QuerySet of Edges
 
-
 ```{py:function} ancestor_edges()
+:noindex:
 
 Ancestor Edge instances for the current Node.
 
@@ -326,8 +311,8 @@ Ancestor Edge instances for the current Node.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} descendant_edges()
+:noindex:
 
 Descendant Edge instances for the current Node.
 
@@ -335,15 +320,14 @@ Descendant Edge instances for the current Node.
 :rtype: QuerySet
 ```
 
-
 ```{py:function} clan_edges()
+:noindex:
 
 Clan Edge instances for the current Node.
 
 :return: Clan Edges
 :rtype: QuerySet
 ```
-
 
 ### Methods returning a Boolean
 
@@ -354,7 +338,6 @@ Returns True if the current Node instance has no parents (Node has an in-degree 
 :rtype: bool
 ```
 
-
 ```{py:function} is_leaf()
 
 Returns True if the current Node instance has no children (Node has an in-degree >=0 and out-degree 0).
@@ -362,14 +345,12 @@ Returns True if the current Node instance has no children (Node has an in-degree
 :rtype: bool
 ```
 
-
 ```{py:function} is_island()
 
 Returns True if the current Node instance has no parents or children (Node has degree 0).
 
 :rtype: bool
 ```
-
 
 ```{py:function} path_exists_from(target_node, directional=True)
 
@@ -380,7 +361,6 @@ Checks whether there is a path from the target Node instance to the current Node
 :rtype: bool
 ```
 
-
 ```{py:function} path_exists_to(target_node, directional=True)
 
 Checks whether there is a path from the current Node instance to the target Node instance.
@@ -389,7 +369,6 @@ Checks whether there is a path from the current Node instance to the target Node
 :param Node directional: (optional) if True, path searching operates normally (in leafward direction), if False search operates in both directions
 :rtype: bool
 ```
-
 
 ```{py:function} is_ancestor_of(target_node, directional=True)
 
@@ -400,7 +379,6 @@ Checks whether the current Node instance is an ancestor of the provided target N
 :rtype: bool
 ```
 
-
 ```{py:function} is_descendant_of(target_node, directional=True)
 
 Checks whether the current Node instance is a descendant of the provided target Node instance.
@@ -410,29 +388,25 @@ Checks whether the current Node instance is a descendant of the provided target 
 :rtype: bool
 ```
 
-
 ```{py:function} is_sibling_of(target_node, directional=True)
 
-Checks whether the current Node instance is a sibling of the provided target Node instance (see [terminology](../terminology)).
+Checks whether the current Node instance is a sibling of the provided target Node instance (see [terminology](../user_guide/terminology)).
 
 :param Node target_node: The node to compare against
 :param Node directional: (optional) if True, path searching operates normally (in leafward direction), if False search operates in both directions
 :rtype: bool
 ```
-
 
 ```{py:function} is_partner_of(target_node, directional=True)
 
-Checks whether the current Node instance is a partner of the provided target Node instance (see [terminology](../terminology)).
+Checks whether the current Node instance is a partner of the provided target Node instance (see [terminology](../user_guide/terminology)).
 
 :param Node target_node: The node to compare against
 :param Node directional: (optional) if True, path searching operates normally (in leafward direction), if False search operates in both directions
 :rtype: bool
 ```
 
-
 ### Methods returning other values
-
 
 ```{py:function} ancestor_count()
 
@@ -441,14 +415,12 @@ Returns the total number of ancestor Nodes.
 :rtype: int
 ```
 
-
 ```{py:function} descendant_count()
 
 Returns the total number of descendant Nodes.
 
 :rtype: int
 ```
-
 
 ```{py:function} clan_count()
 
@@ -457,14 +429,12 @@ Returns the total number of clan Nodes.
 :rtype: int
 ```
 
-
 ```{py:function} sibling_count()
 
 Returns the total number of sibling Nodes.
 
 :rtype: int
 ```
-
 
 ```{py:function} partner_count()
 
@@ -473,7 +443,6 @@ Returns the total number of partner Nodes.
 :rtype: int
 ```
 
-
 ```{py:function} connected_graph_node_count()
 
 Returns the count of all ancestors Nodes, self, and all descendant Nodes.
@@ -481,14 +450,12 @@ Returns the count of all ancestors Nodes, self, and all descendant Nodes.
 :rtype: int
 ```
 
-
 ```{py:function} node_depth()
 
 Returns the depth of this Node instance from furthest root Node.
 
 :rtype: int
 ```
-
 
 ```{py:function} distance(target_node)
 
@@ -498,12 +465,10 @@ Returns the shortest hops count to the target Node.
 :rtype: int
 ```
 
-
 For future consideration:
 
 - descendant_tree()
 - ancestor_tree()
-
 
 ```{py:function} graphs()
 

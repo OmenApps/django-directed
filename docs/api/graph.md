@@ -49,7 +49,6 @@ None
 :rtype: TBD
 ```
 
-
 ## Model Methods
 
 ### Methods used for building/manipulating an instance
@@ -66,7 +65,6 @@ None
 
 ### Methods returning a Boolean
 
-
 ```{py:function} has_connection(node_from, node_to)
 
 Checks if a connection or path exists between two Node instances, within the current Graph.
@@ -77,11 +75,9 @@ Checks if a connection or path exists between two Node instances, within the cur
 :rtype: bool
 ```
 
-
 For future consideration:
 
 - contains_value() check if a graph instance contains a certain value
-
 
 ### Methods returning other values
 
