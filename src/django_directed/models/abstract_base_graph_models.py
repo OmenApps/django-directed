@@ -223,7 +223,7 @@ def base_node(config: GraphConfig):  # noqa: C901
             Sometimes we set a field other than 'pk' for the primary key, so we need to be able to get the
             correct field name so that raw queries return the correct information.
             """
-            return self._meta.pk.name
+            return self._meta.pk.attname
 
         def get_pk_type(self):
             """This method is used to return the postgres type name for the primary key field.
